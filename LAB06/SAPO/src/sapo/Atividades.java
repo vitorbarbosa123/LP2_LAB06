@@ -29,4 +29,11 @@ public class Atividades {
     public void cadastrarTarefa(Tarefas novaTarefa){
         tarefas.add(novaTarefa);
     }
+    public void removerTarefa(String idTarefa){
+        for(int i = 0; i < tarefas.size(); i++){
+            if(this.tarefas.get(i).getCodigo() == idTarefa){
+                this.tarefas.remove(i);
+            }
+        }
+    }
 }

@@ -44,4 +44,10 @@ public class AtividadesController {
         atividade.cadastrarTarefa(tarefa);
     }
 
+    public void removerTarefa(String atividadeId, String idTarefa){
+        Atividades atividade = this.atividades.get(atividadeId);
+        atividade.removerTarefa(idTarefa);
+    }
+
+
 }

@@ -54,7 +54,7 @@ public class FacadeApp {
     }
 
     public void removerTarefa(String idTarefa) {
-        this.tarefasController.removerTarefa(idTarefa);
+        this.tarefasController.removerTarefa(idTarefa, this.atividadesController);
     }
 
     public String exibirTarefa(String idTarefa) {

@@ -37,8 +37,17 @@ public class TarefasController {
         tarefa.concluirTarefa();
     }
 
-    public void removerTarefa(String idTarefa) {
+    public void removerTarefa(String idTarefa, AtividadesController ac) {
+        tarefas.remove(idTarefa);
+        
+        String idAtividade = getIDAtividadeOnTarefa(idTarefa);
+        ac.removerTarefa(idAtividade, idTarefa);
+    }
 
+    private String getIDAtividadeOnTarefa(String idTarefa){
+        String [] parts = idTarefa.split("-");
+        String idAtividade = parts[0] +"-"+ parts[0];
+        return idAtividade;
     }
 
     public String exibirTarefa(String idTarefa) {

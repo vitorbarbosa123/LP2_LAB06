@@ -7,7 +7,9 @@ import java.util.NoSuchElementException;
 public class Tarefas {
     private String codigo;
 
+    private Atividades atividade;
     private boolean concluida;
+
     private Map<String, Pessoa> responsaveis;
 
     private int horasGasta;
@@ -15,10 +17,6 @@ public class Tarefas {
     private String nome;
 
     private String[] habilidades;
-
-    private String comentario;
-
-    private String autorCpf;
 
     public Tarefas(String taferaID, String nome, String[] habilidades) {
         this.codigo = taferaID;
@@ -78,19 +76,22 @@ public class Tarefas {
                 + "Professor, Objetos \n"
                 + "(" + this.horasGasta + " hora(s) executada(s)) \n"
                 + "=== \n"
-                + this.getEquipeString();
+                + this.getResponsaveisString();
 
         return result;
     }
 
-    private String getEquipeString(){
+    private String getResponsaveisString(){
         String result = "Equipe: \n";
-        for (var entry : this.equipe.entrySet()) {
+        for (var entry : this.responsaveis.entrySet()) {
             result += entry.getValue().toString()+" \n";
         }
 
         return result;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
 
 }
