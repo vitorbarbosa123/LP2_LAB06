@@ -1,19 +1,51 @@
 package sapo;
 
+import java.util.ArrayList;
+
 public class Pessoa {
 
     private String cpf;
-
     private String nome;
+    private String[] habilidades;
+    private ArrayList<String> comentarios;
 
-    private str[] habilidades;
+    public Pessoa(String cpf, String nome, String[] habilidades) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.habilidades = habilidades;
+    }
 
-    private String novoNome;
+    public String getNome() {
+        return nome;
+    }
 
-    private str[] novasHabilidades;
+    public String getCpf() {
+        String bloco1 = cpf.substring(0, 3);
+	    String bloco2 = cpf.substring(3, 6);
+	    String bloco3 = cpf.substring(6, 9);
+	    String bloco4 = cpf.substring(9, 11);
+	
+	    this.cpf = bloco1 + "." + bloco2 + "." + bloco3 + "-" + bloco4;
+        return this.cpf;
+    }
 
-    private String comentario;
+    public String[] getHabilidades() {
+        return habilidades;
+    }
 
-    private String autorCpf;
+    public void setNovoNome(String novoNome) {
+        this.nome = novoNome;
+    }
 
+    public void setNovasHabilidades(String[] novasHabilidades) {
+        this.habilidades = novasHabilidades;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentarios.add(comentario);
+    }
+
+    public ArrayList<String> getComentarios() {
+        return comentarios;
+    }
 }
