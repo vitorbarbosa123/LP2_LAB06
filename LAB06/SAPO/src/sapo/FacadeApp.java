@@ -22,14 +22,8 @@ public class FacadeApp {
 
 
 
-    // todo: mudar futuramente
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades) {
-        int finalDoIDTarefa = this.atividadesController.getQuantidadeTaferas(atividadeId);
-        String tarefaID = atividadeId+"-"+finalDoIDTarefa;
-
-        Tarefas novaTarefa =  this.tarefasController.cadastrarTarefa(tarefaID, nome, habilidades);
-        this.atividadesController.cadastrarTarefa(atividadeId, novaTarefa);
-
+        String tarefaID =  this.tarefasController.cadastrarTarefa(atividadeId, nome, habilidades, atividadesController);
         return tarefaID;
     }
 
@@ -58,11 +52,11 @@ public class FacadeApp {
     }
 
     public String exibirTarefa(String idTarefa) {
-        this.tarefasController.exibirTarefa(idTarefa)
+        return this.tarefasController.exibirTarefa(idTarefa);
     }
     
     public void associarPessoaTarefa(String cpf, String idTarefa) {
-       //Pessoa pessoa = this.pessoasController.recuperarPessoa(cpf);
+       //Pessoa pessoa = this.pessoasController.buscarPessoa(cpf);
        //this.tarefasController.associarPessoaTarefa(cpf, idTarefa, pessoa);
     }  
 

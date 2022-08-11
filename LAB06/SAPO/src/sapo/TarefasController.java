@@ -4,12 +4,26 @@ import java.util.*;
 
 public class TarefasController {
 
-    private HashMap<String, Tarefas> tarefas;
+    private Map<String, Tarefas> tarefas;
 
-    public Tarefas cadastrarTarefa(String tarefaID, String nome, String[] habilidades) {
-        Tarefas novaTarefa = new Tarefas(tarefaID, nome, habilidades);
+    public TarefasController(){
+        this.tarefas = new HashMap<>();
+    }
+
+    public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades, AtividadesController atividadesC) {
+        Atividades atividade = atividadesC.buscarAtividade(atividadeId);
+        int finalDoIDTarefa = atividadesC.getQuantidadeTaferas(atividadeId);
+        String tarefaID = atividadeId+"-"+finalDoIDTarefa;
+
+        Tarefas novaTarefa = new Tarefas(tarefaID, nome, habilidades, atividade);
+        atividadesC.cadastrarTarefa(atividadeId, novaTarefa);
+       
         this.tarefas.put(tarefaID, novaTarefa);
-        return novaTarefa;
+        return tarefaID;
+    }
+
+    public Tarefas buscarTarefa(String idTarefa){
+        return this.recuperarTarefaOrException(idTarefa);
     }
 
     public void alterarNomeTarefa(String idTarefa, String novoNome) {

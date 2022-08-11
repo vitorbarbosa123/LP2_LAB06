@@ -18,10 +18,11 @@ public class Tarefas {
 
     private String[] habilidades;
 
-    public Tarefas(String taferaID, String nome, String[] habilidades) {
+    public Tarefas(String taferaID, String nome, String[] habilidades, Atividades atividade) {
         this.codigo = taferaID;
         this.nome = nome;
         this.concluida = false;
+        this.atividade = atividade;
         this.habilidades = habilidades;
     }
 
@@ -71,9 +72,9 @@ public class Tarefas {
 
     @Override
     public String toString() {
-        String result = " Preparar material de estudo - STD-0-15 \n"
-                + "- " + this.nome + " \n"
-                + "Professor, Objetos \n"
+        String result =  this.nome + " - "+this.codigo + " \n"
+                + "- " + this.atividade.getNome() + " \n"
+                + this.getHabilidadesString()
                 + "(" + this.horasGasta + " hora(s) executada(s)) \n"
                 + "=== \n"
                 + this.getResponsaveisString();
@@ -85,6 +86,20 @@ public class Tarefas {
         String result = "Equipe: \n";
         for (var entry : this.responsaveis.entrySet()) {
             result += entry.getValue().toString()+" \n";
+        }
+
+        return result;
+    }
+
+    private String getHabilidadesString(){
+        String result = "";
+        int lengthHabilidades = this.habilidades.length;
+
+        if(lengthHabilidades> 0){
+            for (int i = 0; i < lengthHabilidades-1; i++) {
+                result += this.habilidades[i] + ", ";
+            }
+            result += this.habilidades[lengthHabilidades-1] + " \n";
         }
 
         return result;
