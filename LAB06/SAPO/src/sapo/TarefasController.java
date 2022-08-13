@@ -79,6 +79,11 @@ public class TarefasController {
         tarefa.removerResponsavel(cpf);
     }
 
+    public boolean verificarTarefaIsConcluida(String idTarefa) {
+        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
+        return tarefa.getConcluida();
+    }
+
 
     private Tarefas recuperarTarefaOrException(String idTarefa){
         if(tarefas.containsKey(idTarefa)) return tarefas.get(idTarefa);

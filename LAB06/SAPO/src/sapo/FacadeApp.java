@@ -62,6 +62,10 @@ public class FacadeApp {
 
     public void removerPessoaTarefa(String cpf, String idTarefa) {
         this.tarefasController.removerPessoaTarefa(cpf, idTarefa);
-    } 
+    }
+    
+    public boolean verificarTarefaIsConcluida(String idTarefa) {
+        return this.tarefasController.verificarTarefaIsConcluida(idTarefa);
+    }
 
 }

@@ -8,6 +8,7 @@ public class Tarefas {
     private String codigo;
 
     private Atividades atividade;
+
     private boolean concluida;
 
     private Map<String, Pessoa> responsaveis;
@@ -107,6 +108,10 @@ public class Tarefas {
 
     public String getCodigo() {
         return codigo;
+    }
+
+    public boolean getConcluida(){
+        return this.concluida;
     }
 
 }
