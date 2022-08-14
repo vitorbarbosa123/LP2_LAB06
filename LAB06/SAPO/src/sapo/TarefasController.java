@@ -80,7 +80,7 @@ public class TarefasController {
     }
 
     public boolean verificarTarefaIsConcluida(String idTarefa) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
+        Tarefas tarefa = this.recuperarTarefaOrException(idTarefa);
         return tarefa.getConcluida();
     }
 

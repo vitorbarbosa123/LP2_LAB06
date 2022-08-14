@@ -36,35 +36,43 @@ public class Tarefas {
         this.nome = nome;
     }
 
+    public void concluirTarefa() {
+        this.concluida = true;
+    }
+
+    private void seTarefaConcluidaException(){
+        if(this.concluida) throw new IllegalStateException("Tarefa já concluida");
+    }
+    
     public void adicionarHoras(int novasHoras) {
-        if(this.concluida) return;
+        this.seTarefaConcluidaException();
         this.horasGasta += novasHoras;
     }
 
     /**
-	 * função de remover horas, e caso as horas ser removida sejam maior que as horas atuais, vai zerar as 0.
+	 * função de remover horas, e caso as horas a ser removida sejam maior que as horas atuais
+     * as horas irão zerar, não se tornando assim negativas.
 	 *  
 	 * @param horasRemover 
 	 */
     public void removerHoras(int horasRemover) {
-        if(this.concluida) return;
+        this.seTarefaConcluidaException();
 
         if(horasRemover > this.horasGasta) this.horasGasta = 0;
         else this.horasGasta -= horasRemover;
     }
 
-    public void concluirTarefa() {
-        this.concluida = true;
-    }
-
     public void adicionarNovoResponsavel(String cpf, Pessoa pessoa){
+        this.seTarefaConcluidaException();
         responsaveis.put(cpf, pessoa);
     }
 
     public void removerResponsavel(String cpf){
+        this.seTarefaConcluidaException();
         verificarResponsavel(cpf);
         responsaveis.remove(cpf);
     }
+
 
     private void verificarResponsavel(String cpf){
         if(responsaveis.containsKey(cpf)) return; 
