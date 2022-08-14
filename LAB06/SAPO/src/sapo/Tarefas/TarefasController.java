@@ -1,96 +1,62 @@
 package sapo.Tarefas;
 
-import java.util.*;
-
-import sapo.Atividades.Atividades;
 import sapo.Atividades.AtividadesController;
 import sapo.Pessoas.Pessoa;
 
 public class TarefasController {
 
-    private Map<String, Tarefas> tarefas;
+    private TarefasService tarefasService;
 
-    public TarefasController(){
-        this.tarefas = new HashMap<>();
+    public TarefasController(TarefasService tarefasService){
+        this.tarefasService = tarefasService;
     }
 
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades, AtividadesController atividadesC) {
-        Atividades atividade = atividadesC.buscarAtividade(atividadeId);
-        int finalDoIDTarefa = atividadesC.getQuantidadeTaferas(atividadeId);
-        String tarefaID = atividadeId+"-"+finalDoIDTarefa;
-
-        Tarefas novaTarefa = new Tarefas(tarefaID, nome, habilidades, atividade);
-        atividadesC.cadastrarTarefa(atividadeId, novaTarefa);
-       
-        this.tarefas.put(tarefaID, novaTarefa);
-        return tarefaID;
+        return this.tarefasService.cadastrarTarefa(atividadeId, nome, habilidades, atividadesC);
     }
 
     public Tarefas buscarTarefa(String idTarefa){
-        return this.recuperarTarefaOrException(idTarefa);
+        return this.tarefasService.buscarTarefa(idTarefa);
     }
 
     public void alterarNomeTarefa(String idTarefa, String novoNome) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.setNome(novoNome);
+        this.tarefasService.alterarNomeTarefa(idTarefa, novoNome);
     }
 
     public void alterarHabilidadesTarefa(String idTarefa, String[] habilidades) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.setHabilidades(habilidades);
+        this.tarefasService.alterarHabilidadesTarefa(idTarefa, habilidades);
     }
 
     public void adicionarHorasTarefa(String idTarefa, int horas) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.adicionarHoras(horas);
+        this.tarefasService.adicionarHorasTarefa(idTarefa, horas);
     }
 
     public void removerHorasTarefa(String idTarefa, int horas) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.removerHoras(horas);
+        this.tarefasService.removerHorasTarefa(idTarefa, horas);
     }
 
     public void concluirTarefa(String idTarefa) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.concluirTarefa();
+        this.tarefasService.concluirTarefa(idTarefa);
     }
 
     public void removerTarefa(String idTarefa, AtividadesController ac) {
-        tarefas.remove(idTarefa);
-        
-        String idAtividade = getIDAtividadeOnTarefa(idTarefa);
-        ac.removerTarefa(idAtividade, idTarefa);
-    }
-
-    private String getIDAtividadeOnTarefa(String idTarefa){
-        String [] parts = idTarefa.split("-");
-        String idAtividade = parts[0] +"-"+ parts[0];
-        return idAtividade;
+        this.tarefasService.removerTarefa(idTarefa, ac);
     }
 
     public String exibirTarefa(String idTarefa) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        return tarefa.toString();
+        return this.tarefasService.exibirTarefa(idTarefa);
     }
 
     public void associarPessoaTarefa(String cpf, String idTarefa, Pessoa pessoa) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
-        tarefa.adicionarNovoResponsavel(cpf, pessoa);
+        this.tarefasService.associarPessoaTarefa(cpf, idTarefa, pessoa);
     }
 
     public void removerPessoaTarefa(String cpf, String idTarefa) {
-        Tarefas tarefa = this.recuperarTarefaOrException(idTarefa);
-        tarefa.removerResponsavel(cpf);
+        this.tarefasService.removerPessoaTarefa(cpf, idTarefa);
     }
 
     public boolean verificarTarefaIsConcluida(String idTarefa) {
-        Tarefas tarefa = this.recuperarTarefaOrException(idTarefa);
-        return tarefa.getConcluida();
+        return this.tarefasService.verificarTarefaIsConcluida(idTarefa);
     }
 
-
-    private Tarefas recuperarTarefaOrException(String idTarefa){
-        if(tarefas.containsKey(idTarefa)) return tarefas.get(idTarefa);
-        throw new NoSuchElementException("Tarefa não existe");
-    }
 }

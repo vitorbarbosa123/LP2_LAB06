@@ -54,7 +54,7 @@ public class PessoasController {
         return saida;
     }
 
-    Pessoa recuperarPessoaOrException(String cpf){
+    public Pessoa recuperarPessoaOrException(String cpf){
         if(pessoas.containsKey(cpf)) return pessoas.get(cpf);
         throw new NoSuchElementException("Pessoa não existe");
     }

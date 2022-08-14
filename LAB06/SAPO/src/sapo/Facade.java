@@ -4,6 +4,7 @@ import sapo.Atividades.AtividadesController;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 import sapo.Tarefas.TarefasController;
+import sapo.Tarefas.TarefasService;
 
 public class Facade {
 
@@ -12,9 +13,11 @@ public class Facade {
     private TarefasController tarefasController;
 
     public Facade() {
+        var tarefasService = new TarefasService();
+        
         this.pessoasController = new PessoasController();
         this.atividadesController = new AtividadesController();
-        this.tarefasController = new TarefasController();
+        this.tarefasController = new TarefasController(tarefasService);
     }
 
     public PessoasController getPessoasController() {

@@ -81,7 +81,7 @@ public class AtividadesController {
         atividade.removerTarefa(idTarefa);
     }
 
-    private Atividades recuperaAtividade(String codigo){
+    public Atividades recuperaAtividade(String codigo){
         if(atividades.containsKey(codigo)) return atividades.get(codigo);
         throw new NoSuchElementException("Essa atividade não existe");
     }
