@@ -38,6 +38,15 @@ public class Atividades {
         tarefas.add(novaTarefa);
     }
 
+    public void removerTarefa(String idTarefa){
+        for(int i = 0; i < tarefas.size(); i++){
+            if(this.tarefas.get(i).getCodigo() == idTarefa){
+                this.tarefas.remove(i);
+            }
+        }
+    }
+
+
 
 	public void alterarDescricaoAtividade(String novaDescricao) {
 		this.descricao = novaDescricao;
@@ -69,8 +78,8 @@ public class Atividades {
     }
 	
 	public void encerrarAtividade(String atividadeId) {
-		for (Tarefas i : this.tarefas) {
-			if (this.tarefas.getConcluidas() == false) {
+		for (Tarefas tarefa : this.tarefas) {
+			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes")
 			}
 		}
@@ -84,11 +93,12 @@ public class Atividades {
 
 
 	public void desativarAtividade(String codigo) {
-		for (Tarefas i : this.tarefas) {
-			if (this.tarefas.getConcluidas() == false) {
+		for (Tarefas tarefa : this.tarefas) {
+			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível desativar uma atividade com tarefas pendentes")
 			}
 		}
 		
 	}
+
 }

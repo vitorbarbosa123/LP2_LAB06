@@ -7,7 +7,10 @@ import java.util.NoSuchElementException;
 public class Tarefas {
     private String codigo;
 
+    private Atividades atividade;
+
     private boolean concluida;
+
     private Map<String, Pessoa> responsaveis;
 
     private int horasGasta;
@@ -16,14 +19,11 @@ public class Tarefas {
 
     private String[] habilidades;
 
-    private String comentario;
-
-    private String autorCpf;
-
-    public Tarefas(String taferaID, String nome, String[] habilidades) {
+    public Tarefas(String taferaID, String nome, String[] habilidades, Atividades atividade) {
         this.codigo = taferaID;
         this.nome = nome;
         this.concluida = false;
+        this.atividade = atividade;
         this.habilidades = habilidades;
     }
 
@@ -36,35 +36,43 @@ public class Tarefas {
         this.nome = nome;
     }
 
+    public void concluirTarefa() {
+        this.concluida = true;
+    }
+
+    private void seTarefaConcluidaException(){
+        if(this.concluida) throw new IllegalStateException("Tarefa já concluida");
+    }
+    
     public void adicionarHoras(int novasHoras) {
-        if(this.concluida) return;
+        this.seTarefaConcluidaException();
         this.horasGasta += novasHoras;
     }
 
     /**
-	 * função de remover horas, e caso as horas ser removida sejam maior que as horas atuais, vai zerar as 0.
+	 * função de remover horas, e caso as horas a ser removida sejam maior que as horas atuais
+     * as horas irão zerar, não se tornando assim negativas.
 	 *  
 	 * @param horasRemover 
 	 */
     public void removerHoras(int horasRemover) {
-        if(this.concluida) return;
+        this.seTarefaConcluidaException();
 
         if(horasRemover > this.horasGasta) this.horasGasta = 0;
         else this.horasGasta -= horasRemover;
     }
 
-    public void concluirTarefa() {
-        this.concluida = true;
-    }
-
     public void adicionarNovoResponsavel(String cpf, Pessoa pessoa){
+        this.seTarefaConcluidaException();
         responsaveis.put(cpf, pessoa);
     }
 
     public void removerResponsavel(String cpf){
+        this.seTarefaConcluidaException();
         verificarResponsavel(cpf);
         responsaveis.remove(cpf);
     }
+
 
     private void verificarResponsavel(String cpf){
         if(responsaveis.containsKey(cpf)) return; 
@@ -73,24 +81,45 @@ public class Tarefas {
 
     @Override
     public String toString() {
-        String result = " Preparar material de estudo - STD-0-15 \n"
-                + "- " + this.nome + " \n"
-                + "Professor, Objetos \n"
+        String result =  this.nome + " - "+this.codigo + " \n"
+                + "- " + this.atividade.getNome() + " \n"
+                + this.getHabilidadesString()
                 + "(" + this.horasGasta + " hora(s) executada(s)) \n"
                 + "=== \n"
-                + this.getEquipeString();
+                + this.getResponsaveisString();
 
         return result;
     }
 
-    private String getEquipeString(){
+    private String getResponsaveisString(){
         String result = "Equipe: \n";
-        for (var entry : this.equipe.entrySet()) {
+        for (var entry : this.responsaveis.entrySet()) {
             result += entry.getValue().toString()+" \n";
         }
 
         return result;
     }
 
+    private String getHabilidadesString(){
+        String result = "";
+        int lengthHabilidades = this.habilidades.length;
+
+        if(lengthHabilidades> 0){
+            for (int i = 0; i < lengthHabilidades-1; i++) {
+                result += this.habilidades[i] + ", ";
+            }
+            result += this.habilidades[lengthHabilidades-1] + " \n";
+        }
+
+        return result;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public boolean getConcluida(){
+        return this.concluida;
+    }
 
 }

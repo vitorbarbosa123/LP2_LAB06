@@ -10,7 +10,7 @@ public class AtividadesController {
 		          
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
     	 Atividades novaAtividade = new Atividades(nome, descricao, cpf);
-         String código = criaCodigoAtividade(nome);
+         String codigo = criaCodigoAtividade(nome);
     	 this.atividades.put(codigo, novaAtividade);
         return codigo;
     }
@@ -73,7 +73,12 @@ public class AtividadesController {
         Atividades atividade = this.atividades.get(atividadeId);
         atividade.cadastrarTarefa(tarefa);
     }
-    
+
+    public void removerTarefa(String atividadeId, String idTarefa){
+        Atividades atividade = this.atividades.get(atividadeId);
+        atividade.removerTarefa(idTarefa);
+    }
+
     private Atividades recuperaAtividade(String codigo){
         if(atividades.containsKey(codigo)) return atividades.get(codigo);
         throw new NoSuchElementException("Essa atividade não existe");

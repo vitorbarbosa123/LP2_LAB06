@@ -60,14 +60,8 @@ public class Facade {
         return this.pessoasController.recuperarPessoaOrException(cpf);
     }
 
-    // todo: mudar futuramente
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades) {
-        int finalDoIDTarefa = this.atividadesController.getQuantidadeTaferas(atividadeId);
-        String tarefaID = atividadeId + "-" + finalDoIDTarefa;
-
-        Tarefas novaTarefa =  this.tarefasController.cadastrarTarefa(tarefaID, nome, habilidades);
-        this.atividadesController.cadastrarTarefa(atividadeId, novaTarefa);
-
+        String tarefaID =  this.tarefasController.cadastrarTarefa(atividadeId, nome, habilidades, atividadesController);
         return tarefaID;
     }
 
@@ -92,7 +86,7 @@ public class Facade {
     }
 
     public void removerTarefa(String idTarefa) {
-        this.tarefasController.removerTarefa(idTarefa);
+        this.tarefasController.removerTarefa(idTarefa, this.atividadesController);
     }
 
     public String exibirTarefa(String idTarefa) {
@@ -106,6 +100,10 @@ public class Facade {
 
     public void removerPessoaTarefa(String cpf, String idTarefa) {
         this.tarefasController.removerPessoaTarefa(cpf, idTarefa);
-    } 
+    }
+    
+    public boolean verificarTarefaIsConcluida(String idTarefa) {
+        return this.tarefasController.verificarTarefaIsConcluida(idTarefa);
+    }
 
 }
