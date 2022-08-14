@@ -1,26 +1,64 @@
 package sapo;
 
-public class FacadeApp {
+public class Facade {
 
     private PessoasController pessoasController;
-
     private AtividadesController atividadesController;
-
     private TarefasController tarefasController;
 
-    public PessoasController getPessoasController() {
+    public Facade() {
+        this.pessoasController = new PessoasController();
+        this.atividadesController = new AtividadesController();
+        this.tarefasController = new TarefasController();
+    }
 
+    public PessoasController getPessoasController() {
+        return pessoasController;
     }
 
     public AtividadesController getAtividadesController() {
-
+        return atividadesController;
     }
 
     public TarefasController getTarefasController() {
-
+        return tarefasController;
     }
 
+    public void cadastrarPessoa(String cpf, String nome, String[] habilidades) {
+        this.pessoasController.cadastrarPessoa(cpf, nome, habilidades);
+    }
 
+    public Pessoa buscarPessoa(String cpf) {
+        return this.pessoasController.buscarPessoa(cpf);
+    }
+
+    public String exibirPessoa(String cpf) {
+        return this.pessoasController.exibirPessoa(cpf);
+    }
+
+    public void alterarNomePessoa(String cpf, String novoNome) {
+        this.pessoasController.alterarNomePessoa(cpf, novoNome);
+    }
+
+    public void alterarHabilidadesPessoa(String cpf, String[] novasHabilidades) {
+        this.pessoasController.alterarHabilidadesPessoa(cpf, novasHabilidades);
+    }
+
+    public void removerPessoa(String cpf) {
+        this.pessoasController.removerPessoa(cpf);
+    }
+
+    public void adicionarComentarioPessoa(String cpf, String comentario, String autorCpf) {
+        this.pessoasController.adicionarComentarioPessoa(cpf, comentario, autorCpf);
+    }
+
+    public String listarComentariosPessoa(String cpf) {
+        return this.pessoasController.listarComentariosPessoa(cpf);
+    }
+
+    Pessoa recuperarPessoaOrException(String cpf){
+        return this.pessoasController.recuperarPessoaOrException(cpf);
+    }
 
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades) {
         String tarefaID =  this.tarefasController.cadastrarTarefa(atividadeId, nome, habilidades, atividadesController);
@@ -56,8 +94,8 @@ public class FacadeApp {
     }
     
     public void associarPessoaTarefa(String cpf, String idTarefa) {
-       //Pessoa pessoa = this.pessoasController.buscarPessoa(cpf);
-       //this.tarefasController.associarPessoaTarefa(cpf, idTarefa, pessoa);
+       Pessoa pessoa = this.pessoasController.recuperarPessoaOrException(cpf);
+       this.tarefasController.associarPessoaTarefa(cpf, idTarefa, pessoa);
     }  
 
     public void removerPessoaTarefa(String cpf, String idTarefa) {

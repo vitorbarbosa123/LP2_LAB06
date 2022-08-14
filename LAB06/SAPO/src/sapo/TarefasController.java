@@ -75,7 +75,7 @@ public class TarefasController {
     }
 
     public void removerPessoaTarefa(String cpf, String idTarefa) {
-        Tarefas tarefa =this.recuperarTarefaOrException(idTarefa);
+        Tarefas tarefa = this.recuperarTarefaOrException(idTarefa);
         tarefa.removerResponsavel(cpf);
     }
 
