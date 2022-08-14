@@ -14,24 +14,11 @@ public class AtividadesController {
     	 this.atividades.put(codigo, novaAtividade);
         return codigo;
     }
-    
-    
-    public String criaCodigoAtividade(String nome, String codigo) {
-
-
-    private HashMap<String, Atividades> atividades;
-    private HashMap<String, Tarefas> tarefas;
-
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-    	this.atividades.put(criaCodigoAtividade(nome), new Atividades( nome, descricao, cpf));
-    	return "";
-    }
-    
+           
     public String criaCodigoAtividade(String nome) {
-    	String codigo = "";
 
+    	String codigo = "";
     	String marcador = "X";
-    	
     	codigo = nome.replaceAll("[aeiou]", "");
     	    	
     	if(codigo.length() < 3) {
@@ -91,7 +78,4 @@ public class AtividadesController {
         if(atividades.containsKey(codigo)) return atividades.get(codigo);
         throw new NoSuchElementException("Essa atividade não existe");
     }
-
-    }
-
 }
