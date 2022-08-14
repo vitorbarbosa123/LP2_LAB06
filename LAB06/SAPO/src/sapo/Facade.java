@@ -1,5 +1,10 @@
 package sapo;
 
+import sapo.Atividades.AtividadesController;
+import sapo.Pessoas.Pessoa;
+import sapo.Pessoas.PessoasController;
+import sapo.Tarefas.TarefasController;
+
 public class Facade {
 
     private PessoasController pessoasController;

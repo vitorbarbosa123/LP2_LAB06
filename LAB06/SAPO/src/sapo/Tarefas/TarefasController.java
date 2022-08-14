@@ -1,6 +1,10 @@
-package sapo;
+package sapo.Tarefas;
 
 import java.util.*;
+
+import sapo.Atividades.Atividades;
+import sapo.Atividades.AtividadesController;
+import sapo.Pessoas.Pessoa;
 
 public class TarefasController {
 

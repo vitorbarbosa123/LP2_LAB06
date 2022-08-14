@@ -1,7 +1,9 @@
-package sapo;
+package sapo.Atividades;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+
+import sapo.Tarefas.Tarefas;
 
 public class AtividadesController {
 

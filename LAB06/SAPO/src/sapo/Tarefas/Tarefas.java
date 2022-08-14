@@ -1,8 +1,11 @@
-package sapo;
+package sapo.Tarefas;
 
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import sapo.Atividades.Atividades;
+import sapo.Pessoas.Pessoa;
 
 public class Tarefas {
     private String codigo;
