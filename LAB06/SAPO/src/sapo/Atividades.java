@@ -29,17 +29,7 @@ public class Atividades {
     		throw new IllegalArgumentException("CPF VAZIO OU NULO");
     	}
     }
-    
-          
-
-    private List<Tarefas> tarefas;
-    
-    public Atividades (String nome, String descricao, String cpf) {
-    	this.nome = nome;
-    	this.descricao = descricao;
-    	this.autorCpf = cpf;
-    }
-
+        
     public int getQuantidadeTarefas(){
         return this.tarefas.size();
     }
@@ -61,7 +51,6 @@ public class Atividades {
 
 	public String exibirAtividade(String codigo) {
 		
-		
 		return codigo + ":" + this.nome
 				+ "Responsável: Matheus Gaudencio do Rêgo – " + cpf
 				+ "==="
@@ -80,25 +69,26 @@ public class Atividades {
     }
 	
 	public void encerrarAtividade(String atividadeId) {
-		// TODO Auto-generated method stub
+		for (Tarefas i : this.tarefas) {
+			if (this.tarefas.getConcluidas() == false) {
+				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes")
+			}
+		}
 		
 	}
 
 
 	public void reabrirAtividade(String codigo) {
 		// TODO Auto-generated method stub
-		
 	}
 
 
 	public void desativarAtividade(String codigo) {
-		// TODO Auto-generated method stub
+		for (Tarefas i : this.tarefas) {
+			if (this.tarefas.getConcluidas() == false) {
+				throw new IllegalStateException("Não é possível desativar uma atividade com tarefas pendentes")
+			}
+		}
 		
 	}
-
-
-
-
-
-	
 }
