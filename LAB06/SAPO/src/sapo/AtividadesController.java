@@ -5,9 +5,30 @@ import java.util.HashMap;
 public class AtividadesController {
 
     private HashMap<String, Atividades> atividades;
+    private HashMap<String, Tarefas> tarefas;
 
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        return "";
+    	this.atividades.put(criaCodigoAtividade(nome), new Atividades( nome, descricao, cpf));
+    	return "";
+    }
+    
+    public String criaCodigoAtividade(String nome) {
+    	String codigo = "";
+    	String marcador = "X";
+    	
+    	codigo = nome.replaceAll("[aeiou]", "");
+    	    	
+    	if(codigo.length() < 3) {
+    		codigo = codigo + marcador; 
+    	}
+    	    	
+    	codigo = codigo + "-" + tamanhoDeAtividades(atividades);
+    	
+    	return codigo;
+    }
+    
+    public String tamanhoDeAtividades(HashMap<String, Atividades> atividades) {
+    	return Integer.toString(atividades.size());
     }
 
     public void encerrarAtividade(String atividadeId) {
