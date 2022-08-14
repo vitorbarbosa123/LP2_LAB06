@@ -4,22 +4,32 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class AtividadesController {
+
 	
 	private HashMap<String, Atividades> atividades;
-	private String codigo;
-	
-	public AtividadesController(String codigo) {
-		this.codigo = "";
-	}
-	          
+		          
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
     	 Atividades novaAtividade = new Atividades(nome, descricao, cpf);
+         String código = criaCodigoAtividade(nome);
     	 this.atividades.put(codigo, novaAtividade);
         return codigo;
     }
     
     
     public String criaCodigoAtividade(String nome, String codigo) {
+
+
+    private HashMap<String, Atividades> atividades;
+    private HashMap<String, Tarefas> tarefas;
+
+    public String cadastrarAtividade(String nome, String descricao, String cpf) {
+    	this.atividades.put(criaCodigoAtividade(nome), new Atividades( nome, descricao, cpf));
+    	return "";
+    }
+    
+    public String criaCodigoAtividade(String nome) {
+    	String codigo = "";
+
     	String marcador = "X";
     	
     	codigo = nome.replaceAll("[aeiou]", "");
@@ -80,6 +90,8 @@ public class AtividadesController {
     private Atividades recuperaAtividade(String codigo){
         if(atividades.containsKey(codigo)) return atividades.get(codigo);
         throw new NoSuchElementException("Essa atividade não existe");
+    }
+
     }
 
 }

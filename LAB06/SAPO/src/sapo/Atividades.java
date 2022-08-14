@@ -6,10 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.List;
 
 public class Atividades {
-    private String id;
     
-    private String cpf;
-
     private String nome;
 
     private String autorCpf;
@@ -34,6 +31,15 @@ public class Atividades {
     }
     
           
+
+    private List<Tarefas> tarefas;
+    
+    public Atividades (String nome, String descricao, String cpf) {
+    	this.nome = nome;
+    	this.descricao = descricao;
+    	this.autorCpf = cpf;
+    }
+
     public int getQuantidadeTarefas(){
         return this.tarefas.size();
     }
