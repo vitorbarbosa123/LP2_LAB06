@@ -3,6 +3,7 @@ package sapo;
 import sapo.Atividades.AtividadesController;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
+import sapo.Pessoas.PessoasService;
 import sapo.Tarefas.TarefasController;
 import sapo.Tarefas.TarefasService;
 
@@ -13,9 +14,10 @@ public class Facade {
     private TarefasController tarefasController;
 
     public Facade() {
+        var pessoasService = new PessoasService();
         var tarefasService = new TarefasService();
         
-        this.pessoasController = new PessoasController();
+        this.pessoasController = new PessoasController(pessoasService);
         this.atividadesController = new AtividadesController();
         this.tarefasController = new TarefasController(tarefasService);
     }
@@ -36,7 +38,7 @@ public class Facade {
         this.pessoasController.cadastrarPessoa(cpf, nome, habilidades);
     }
 
-    public Pessoa buscarPessoa(String cpf) {
+    public String buscarPessoa(String cpf) {
         return this.pessoasController.buscarPessoa(cpf);
     }
 
@@ -65,7 +67,7 @@ public class Facade {
     }
 
     Pessoa recuperarPessoaOrException(String cpf){
-        return this.pessoasController.recuperarPessoaOrException(cpf);
+        return this.pessoasController.recuperarPessoa(cpf);
     }
 
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades) {
@@ -102,7 +104,7 @@ public class Facade {
     }
     
     public void associarPessoaTarefa(String cpf, String idTarefa) {
-       Pessoa pessoa = this.pessoasController.recuperarPessoaOrException(cpf);
+       Pessoa pessoa = this.pessoasController.recuperarPessoa(cpf);
        this.tarefasController.associarPessoaTarefa(cpf, idTarefa, pessoa);
     }  
 
