@@ -116,4 +116,33 @@ public class Facade {
         return this.tarefasController.verificarTarefaIsConcluida(idTarefa);
     }
 
+    public String cadastrarAtividade(String nome, String descricao, String cpf) {
+        String codigo = this.atividadesController.cadastrarAtividade(nome, descricao, cpf)
+       return codigo;
+    }    
+
+    public void encerrarAtividade(String codigo) {
+    	this.atividadesController.encerrarAtividade(codigo);
+    }
+
+    public void desativarAtividade(String codigo) {
+    	this.atividadesController.desativaAtvidade(codigo);
+    }
+
+    public void reabrirAtividade(String codigo) {
+    	this.atividadesController.reabrirAtividade(codigo);
+    }
+
+    public String exibirAtividade(String codigo) {
+    	String exibeAtividade = this.atividadesController.exibirAtividade(codigo);
+    	return exibeAtividade;
+    }
+
+    public void alterarDescricaoAtividade(String codigo, String descricao) {
+    	this.atividadesController.alteraDecricaoAtividade(codigo);
+    }
+
+    public void alterarResponsavelAtividade(String codigo, String cpf) {
+    	this.atividadesController.alteraResponsavelAtividade(codigo);
+    }
 }
