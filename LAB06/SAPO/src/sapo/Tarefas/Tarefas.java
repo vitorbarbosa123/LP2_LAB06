@@ -1,6 +1,5 @@
 package sapo.Tarefas;
 
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -8,18 +7,13 @@ import sapo.Atividades.Atividades;
 import sapo.Pessoas.Pessoa;
 
 public class Tarefas {
+
     private String codigo;
-
     private Atividades atividade;
-
     private boolean concluida;
-
     private Map<String, Pessoa> responsaveis;
-
     private int horasGasta;
-
     private String nome;
-
     private String[] habilidades;
 
     public Tarefas(String taferaID, String nome, String[] habilidades, Atividades atividade) {
@@ -29,7 +23,6 @@ public class Tarefas {
         this.atividade = atividade;
         this.habilidades = habilidades;
     }
-
 
     public void setHabilidades(String[] habilidades) {
         this.habilidades = habilidades;

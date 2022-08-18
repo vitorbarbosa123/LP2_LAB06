@@ -1,5 +1,7 @@
 package sapo.Atividades;
 
+import sapo.Tarefas.Tarefas;
+
 public class AtividadesController {
 
 	private AtividadesService atividadesService;
@@ -25,14 +27,30 @@ public class AtividadesController {
     }
 
     public String exibirAtividade(String codigo) {
-    	return this.atividadesService.exibeAtividade(codigo);
+    	return this.atividadesService.exibirAtividade(codigo);
     }
 
     public void alterarDescricaoAtividade(String codigo, String descricao) {
-    	this.atividadesService.alteraDecricaoAtividade(codigo, descricao);
+    	this.atividadesService.alterarDescricaoAtividade(codigo, descricao);
     }
 
     public void alterarResponsavelAtividade(String codigo, String cpf) {
     	this.atividadesService.alterarResponsavelAtividade(codigo, cpf);
+    }
+
+    public Atividades recuperaAtividade(String atividadeId) {
+        return this.atividadesService.recuperaAtividade(atividadeId);
+    }
+
+    public int getQuantidadeTaferas(String atividadeId) {
+        return this.atividadesService.getQuantidadeTarefas(atividadeId);
+    }
+
+    public void cadastrarTarefa(String atividadeId, Tarefas novaTarefa) {
+        this.cadastrarTarefa(atividadeId, novaTarefa);
+    }
+
+    public void removerTarefa(String idAtividade, String idTarefa) {
+        this.removerTarefa(idAtividade, idTarefa);
     }
 }
