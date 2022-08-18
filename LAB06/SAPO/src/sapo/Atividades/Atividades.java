@@ -16,9 +16,15 @@ public class Atividades {
     
     private String descricao;
 
+	// pensar em um nome melhor
+
+	private Tarefas tarefa;
+
     private ArrayList<Tarefas> tarefas;
     
     private boolean concluida;
+
+	private int tarefasConcluidas;
     
  
     public Atividades(String nome, String descricao, String cpf) {
@@ -49,59 +55,72 @@ public class Atividades {
         }
     }
 
-
-
 	public void alterarDescricaoAtividade(String novaDescricao) {
 		this.descricao = novaDescricao;
 	}
-
 
 	public void alterarResponsavelAtividade(String novoCpf) {
 		this.autorCpf = novoCpf;
 	}
 
-
 	public String exibirAtividade(String codigo) {
 		
-		return codigo + ":" + this.nome
-				+ "Responsável: Matheus Gaudencio do Rêgo – " + cpf
+		return this.codigo + ":" + this.nome
+				+ "Responsável(s): " + this.getResponsaveisTarefa + " – " + this.cpf
 				+ "==="
 				+ this.descricao
 				+ "==="
-				+ "Tarefas:" + tarefasRealizadas + "/" + tarefasCadastradas
+				+ "Tarefas:" + this.tarefasConcluidas + "/" + tarefas.size()
 				+ "-" +  tarefas.get(0)
 				+ "-" +  tarefas.get(1)
 				+ "-" +  tarefas.get(2);
-		
 	}
-
 
 	public void concluirAtividade() {
         this.concluida = true;
     }
+
+	public int getTarefasConcluidas() {
+		for (Tarefas tarefas : this.tarefas) {
+			if (tarefa.getConcluida() == true) {
+				this.tarefasConcluidas += 1;
+			}
+		}
+	}
+
+	public String getResponsaveisTarefa() {
+		for (String chave : tarefa.keySet()) {
+			return tarefa.get(chave);
+		}
+	}
 	
 	public void encerrarAtividade(String atividadeId) {
 		for (Tarefas tarefa : this.tarefas) {
 			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes")
+			} else {
+				this.concluirAtividade();
+				return "Atividade encerrada com sucesso";
 			}
 		}
 		
 	}
 
-
 	public void reabrirAtividade(String codigo) {
-		// TODO Auto-generated method stub
+		if (this.concluida == true) {
+			throw new IllegalStateException("Não é possível reabrir uma atividade já aberta.")
+		} else {
+			this.concluida = false;	
+		}
 	}
-
-
+	
 	public void desativarAtividade(String codigo) {
 		for (Tarefas tarefa : this.tarefas) {
 			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível desativar uma atividade com tarefas pendentes")
+			} else {
+				this.concluirAtividade();
 			}
-		}
-		
+		}	
 	}
-
 }
