@@ -84,6 +84,7 @@ public class Atividades {
 		return this.tarefasConcluidas;
 	}
 
+	// ERRO AQUI
 	public String getResponsaveisTarefa() {
 		for (String chave : tarefa.keySet()) {
 			return tarefa.get(chave);
@@ -94,11 +95,9 @@ public class Atividades {
 		for (Tarefas tarefa : this.tarefas) {
 			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes");
-			} else {
-				this.concluirAtividade();
-				return "Atividade encerrada com sucesso";
 			}
 		}
+		return "Atividade encerrada com sucesso";
 	}
 
 	public void reabrirAtividade(String codigo) {
