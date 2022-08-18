@@ -1,6 +1,7 @@
 package sapo;
 
 import sapo.Atividades.AtividadesController;
+import sapo.Atividades.AtividadesService;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 import sapo.Pessoas.PessoasService;
@@ -15,10 +16,11 @@ public class Facade {
 
     public Facade() {
         var pessoasService = new PessoasService();
+        var AtividadesService = new AtividadesService();
         var tarefasService = new TarefasService();
         
         this.pessoasController = new PessoasController(pessoasService);
-        this.atividadesController = new AtividadesController();
+        this.atividadesController = new AtividadesController(AtividadesService);
         this.tarefasController = new TarefasController(tarefasService);
     }
 
@@ -117,8 +119,8 @@ public class Facade {
     }
 
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        String codigo = this.atividadesController.cadastrarAtividade(nome, descricao, cpf)
-       return codigo;
+        String codigo = this.atividadesController.cadastrarAtividade(nome, descricao, cpf);
+        return codigo;
     }    
 
     public void encerrarAtividade(String codigo) {
@@ -126,7 +128,7 @@ public class Facade {
     }
 
     public void desativarAtividade(String codigo) {
-    	this.atividadesController.desativaAtvidade(codigo);
+    	this.atividadesController.desativarAtividade(codigo);
     }
 
     public void reabrirAtividade(String codigo) {
@@ -139,10 +141,10 @@ public class Facade {
     }
 
     public void alterarDescricaoAtividade(String codigo, String descricao) {
-    	this.atividadesController.alteraDecricaoAtividade(codigo);
+    	this.atividadesController.alterarDescricaoAtividade(codigo, descricao);
     }
 
     public void alterarResponsavelAtividade(String codigo, String cpf) {
-    	this.atividadesController.alteraResponsavelAtividade(codigo);
+    	this.atividadesController.alterarResponsavelAtividade(codigo, cpf);
     }
 }
