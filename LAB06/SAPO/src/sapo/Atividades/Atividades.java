@@ -95,9 +95,8 @@ public class Atividades {
 			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes");
 			}
-			return "Atividade encerrada com sucesso";
 		}
-		return "Erro ao iniciar atividade";
+		return "Atividade encerrada com sucesso";
 	}
 
 	public void reabrirAtividade(String codigo) {
