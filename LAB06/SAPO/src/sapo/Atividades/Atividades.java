@@ -1,24 +1,23 @@
 package sapo.Atividades;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-
 import sapo.Tarefas.Tarefas;
-
-import java.util.List;
+import sapo.Pessoas.Pessoa;
+import sapo.Pessoas.PessoasController;
 
 public class Atividades {
     
     private String nome;
     private String cpf;
     private String descricao;
-	// pensar em um nome melhor
-	private Tarefas tarefa;
+		// pensar em um nome melhor
+		private Tarefas tarefa;
+
     private ArrayList<Tarefas> tarefas;
     private boolean concluida;
-	private int tarefasConcluidas;
- 
+
+		private PessoasController pessoasController;
+
     public Atividades(String nome, String descricao, String cpf) {
     	this.nome = nome;
     	this.descricao = descricao;
@@ -59,15 +58,15 @@ public class Atividades {
 	}
 
 	public String exibirAtividade(String codigo) {
-		
-		return codigo + ":" + this.nome
-				+ "Responsável(s): " + this.getResponsaveisTarefa() + " – " + this.cpf
-				+ "==="
-				+ this.descricao
-				+ "==="
-				+ "Tarefas:" + this.tarefasConcluidas + "/" + tarefas.size()
-				+ "-" +  tarefas.get(0)
-				+ "-" +  tarefas.get(1)
+
+		return codigo + ":" + this.nome + "\n"
+				+ "Responsável(s): " + this.getResponsavelAtividade() + " – " + this.cpf + "\n"
+				+ "===" + "\n"
+				+ this.descricao + "\n"
+				+ "===" + "\n"
+				+ "Tarefas:" + getTarefasConcluidas() + "/" + tarefas.size() + "\n"
+				+ "-" +  tarefas.get(0) + "\n"
+				+ "-" +  tarefas.get(1) + "\n"
 				+ "-" +  tarefas.get(2);
 	}
 
@@ -76,18 +75,18 @@ public class Atividades {
     }
 
 	public int getTarefasConcluidas() {
-		for (Tarefas tarefas : this.tarefas) {
+		int tarefasConcluidas = 0;
+
+		for (Tarefas tarefa : this.tarefas) {
 			if (tarefa.getConcluida() == true) {
-				this.tarefasConcluidas += 1;
+				tarefasConcluidas += 1;
 			}
 		}
-		return this.tarefasConcluidas;
+		return tarefasConcluidas;
 	}
 
-	public String getResponsaveisTarefa() {
-		for (String chave : tarefa.keySet()) {
-			return tarefa.get(chave);
-		}
+	public Pessoa getResponsavelAtividade() {
+		return this.pessoasController.recuperarPessoa(cpf);
 	}
 	
 	public String encerrarAtividade(String atividadeId) {
@@ -95,9 +94,8 @@ public class Atividades {
 			if (tarefa.getConcluida() == false) {
 				throw new IllegalStateException("Não é possível encerrar uma atividade com tarefas pendentes");
 			}
-			return "Atividade encerrada com sucesso";
 		}
-		return "Erro ao iniciar atividade";
+		return "Atividade encerrada com sucesso";
 	}
 
 	public void reabrirAtividade(String codigo) {
