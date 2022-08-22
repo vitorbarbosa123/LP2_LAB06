@@ -118,4 +118,8 @@ public class Tarefas {
         return this.concluida;
     }
 
+    public String toStringNomeAndCodigo(){
+        return this.nome + " - " + this.codigo;
+    }
+
 }

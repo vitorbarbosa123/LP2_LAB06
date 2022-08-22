@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 public class PessoasService {
 
+
     private PessoasRepository pessoasRepository;
 
+    public PessoasService(){
+        pessoasRepository = new PessoasRepository();
+    }
+
     public Pessoa cadastrarPessoa(String cpf, String nome, String[] habilidades) {
-        return this.pessoasRepository.cadastrarPessoa(cpf, nome, habilidades);
+    	return this.pessoasRepository.cadastrarPessoa(cpf, nome, habilidades);
     }
 
     public String buscarPessoa(String cpf) {

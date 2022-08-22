@@ -9,6 +9,10 @@ public class AtividadesRepository {
 
     private HashMap<String, Atividades> atividades;
 
+    public AtividadesRepository(){
+        this.atividades = new HashMap<>();
+    }
+    
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         Atividades novaAtividade = new Atividades(nome, descricao, cpf);
         String codigo = criaCodigoAtividade(nome);
@@ -26,12 +30,12 @@ public class AtividadesRepository {
             codigo = codigo + marcador; 
         }
                 
-        codigo = codigo + "-" + tamanhoDeAtividades(atividades);
+        codigo = codigo + "-" + tamanhoDeAtividades();
         
         return codigo;
     }
    
-    public String tamanhoDeAtividades(HashMap<String, Atividades> atividades) {
+    public String tamanhoDeAtividades() {
         return Integer.toString(atividades.size());
     }
 
