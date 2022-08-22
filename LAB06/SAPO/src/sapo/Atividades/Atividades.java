@@ -86,7 +86,8 @@ public class Atividades {
 	}
 
 	public Pessoa getResponsavelAtividade() {
-		return this.pessoasController.recuperarPessoa(cpf);
+		Pessoa pessoa = this.pessoasController.recuperarPessoa(cpf);
+		return pessoa.getNome();
 	}
 	
 	public String encerrarAtividade(String atividadeId) {
