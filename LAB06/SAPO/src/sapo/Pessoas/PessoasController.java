@@ -21,7 +21,7 @@ public class PessoasController {
     }
 
     public void alterarNomePessoa(String cpf, String novoNome) {
-        this.pessoasService.alterarNomePessoa(cpf, novoNome);;
+        this.pessoasService.alterarNomePessoa(cpf, novoNome);
     }
 
     public void alterarHabilidadesPessoa(String cpf, String[] novasHabilidades) {

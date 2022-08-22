@@ -4,6 +4,11 @@ public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
 
+
+    public AtividadesService(){
+        this.atividadesRepository = new AtividadesRepository();
+    }
+
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf);
     }

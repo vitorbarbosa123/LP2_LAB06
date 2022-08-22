@@ -1,5 +1,6 @@
 package sapo.Atividades;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -9,6 +10,10 @@ public class AtividadesRepository {
 
     private HashMap<String, Atividades> atividades;
 
+    public AtividadesRepository(){
+        this.atividades = new HashMap<>();
+    }
+    
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         Atividades novaAtividade = new Atividades(nome, descricao, cpf);
         String codigo = criaCodigoAtividade(nome);
@@ -26,12 +31,21 @@ public class AtividadesRepository {
             codigo = codigo + marcador; 
         }
                 
-        codigo = codigo + "-" + tamanhoDeAtividades(atividades);
+        codigo = codigo + "-" + tamanhoDeAtividades();
         
         return codigo;
     }
+
+    // AQUI - Buscas
+    public ArrayList<String> getTermos() {
+        ArrayList<String> termos;
+        termos.add(this.atividades.getNome().split(" "));
+        termos.add(this.atividades.getDescricao().split(" "));
+        termos.add(criaCodigoAtividade(nome).split("-"));
+        return termos;
+    }
    
-    public String tamanhoDeAtividades(HashMap<String, Atividades> atividades) {
+    public String tamanhoDeAtividades() {
         return Integer.toString(atividades.size());
     }
 

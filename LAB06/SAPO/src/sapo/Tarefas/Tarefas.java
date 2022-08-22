@@ -14,6 +14,7 @@ public class Tarefas {
     private Map<String, Pessoa> responsaveis;
     private int horasGasta;
     private String nome;
+
     private String[] habilidades;
 
     public Tarefas(String taferaID, String nome, String[] habilidades, Atividades atividade) {
@@ -30,6 +31,10 @@ public class Tarefas {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void concluirTarefa() {
@@ -116,6 +121,10 @@ public class Tarefas {
 
     public boolean getConcluida(){
         return this.concluida;
+    }
+
+    public String toStringNomeAndCodigo(){
+        return this.nome + " - " + this.codigo;
     }
 
 }

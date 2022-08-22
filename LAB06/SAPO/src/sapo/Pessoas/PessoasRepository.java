@@ -1,6 +1,7 @@
 package sapo.Pessoas;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class PessoasRepository {
@@ -9,6 +10,10 @@ public class PessoasRepository {
 
     public PessoasRepository(){
         this.pessoas = new HashMap<>();
+    }
+
+    public Map<String, Pessoa> getPessoas() {
+        return pessoas;
     }
 
     public Pessoa cadastrarPessoa(String cpf, String nome, String[] habilidades) {

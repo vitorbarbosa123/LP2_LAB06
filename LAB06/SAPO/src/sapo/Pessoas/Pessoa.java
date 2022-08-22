@@ -48,4 +48,18 @@ public class Pessoa {
     public ArrayList<String> getComentarios() {
         return comentarios;
     }
+
+    public ArrayList<String> getTermos() {
+        ArrayList<String> termos = new ArrayList<>();
+        termos.add(cpf);
+        String[] nomeSplit = nome.split(" ");
+        for (int i = 0; i < nomeSplit.length; i++) {
+            termos.add(nomeSplit[i]);
+        }
+        for (int i = 0; i < habilidades.length; i++) {
+            termos.add(habilidades[i]);
+        }
+        return termos;
+    }
+
 }
