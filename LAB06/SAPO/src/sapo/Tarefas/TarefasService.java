@@ -1,5 +1,7 @@
 package sapo.Tarefas;
 
+import java.util.Collection;
+
 import sapo.Atividades.Atividades;
 import sapo.Atividades.AtividadesController;
 import sapo.Pessoas.Pessoa;
@@ -95,6 +97,7 @@ public class TarefasService {
         return tarefa.getConcluida();
     }
 
+
     public int getHorasDeTodasAsTarefas() {
         int tempoTotal = this.tarefasRepository.getHorasTarefas();
         return tempoTotal;
@@ -103,6 +106,11 @@ public class TarefasService {
     public String getHabilidadesDeTodasAsTarefas() {
         String habilidades = this.tarefasRepository.getHabilidadesTarefas();
         return habilidades;
+        
+    }
+    public Collection<Tarefas> getMapa() {
+        return this.tarefasRepository.getMapa();
+
     }
 
 }

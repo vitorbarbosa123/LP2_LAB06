@@ -1,5 +1,7 @@
 package sapo.Atividades;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -9,6 +11,18 @@ public class AtividadesRepository {
 
     private HashMap<String, Atividades> atividades;
 
+    public AtividadesRepository(){
+        this.atividades = new HashMap<>();
+    }
+
+    public Collection<Atividades> getMapa() {
+        return this.atividades.values();
+    }
+
+    public HashMap<String, Atividades> getAtividade() {
+        return atividades;
+    }
+    
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         Atividades novaAtividade = new Atividades(nome, descricao, cpf);
         String codigo = criaCodigoAtividade(nome);
@@ -26,12 +40,32 @@ public class AtividadesRepository {
             codigo = codigo + marcador; 
         }
                 
-        codigo = codigo + "-" + tamanhoDeAtividades(atividades);
+        codigo = codigo + "-" + tamanhoDeAtividades();
         
         return codigo;
     }
+
+    public ArrayList<String> getTermos(String atividadeId) {
+        ArrayList<String> termos = new ArrayList<>();
+        Atividades atividade = this.recuperaAtividade(atividadeId);
+        String[] nome = atividade.getNome().split(" ");
+        String[] descricao = atividade.getDescricao().split(" ");
+        String[] codigo = atividadeId.split("-");
+
+        for (int i = 0; i < nome.length; i++) {
+            termos.add(nome[i]);
+        }
+        for (int i = 0; i < descricao.length; i++) {
+            termos.add(descricao[i]);
+        }
+        for (int i = 0; i < codigo.length; i++) {
+            termos.add(codigo[i]);
+        }
+
+        return termos;
+    }
    
-    public String tamanhoDeAtividades(HashMap<String, Atividades> atividades) {
+    public String tamanhoDeAtividades() {
         return Integer.toString(atividades.size());
     }
 

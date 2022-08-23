@@ -1,5 +1,7 @@
 package sapo.Tarefas;
 
+import java.util.Collection;
+
 import sapo.Atividades.AtividadesController;
 import sapo.Pessoas.Pessoa;
 
@@ -57,6 +59,10 @@ public class TarefasController {
 
     public boolean verificarTarefaIsConcluida(String idTarefa) {
         return this.tarefasService.verificarTarefaIsConcluida(idTarefa);
+    }
+
+    public Collection<Tarefas> getMapa() {
+        return this.tarefasService.getMapa();
     }
 
 }

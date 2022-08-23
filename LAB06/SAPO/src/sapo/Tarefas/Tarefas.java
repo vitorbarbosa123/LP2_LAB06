@@ -32,6 +32,10 @@ public class Tarefas {
         this.nome = nome;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void concluirTarefa() {
         this.concluida = true;
     }
@@ -120,6 +124,12 @@ public class Tarefas {
 
     public int getHoras() {
         return this.horasGasta;
+
+    }
+    
+    public String toStringNomeAndCodigo(){
+        return this.nome + " - " + this.codigo;
+
     }
 
 }

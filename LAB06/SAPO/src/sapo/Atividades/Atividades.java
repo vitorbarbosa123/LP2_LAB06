@@ -23,6 +23,7 @@ public class Atividades {
     	this.descricao = descricao;
     	this.cpf = cpf;
     	this.concluida = false;
+    	this.tarefas = new ArrayList<>();
     	
     	if(cpf.isEmpty() || cpf.isBlank()  ) {
     		throw new IllegalArgumentException("CPF VAZIO OU NULO");
@@ -31,6 +32,10 @@ public class Atividades {
 
 	public String getNome() {
 		return this.nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
 	}
         
     public int getQuantidadeTarefas(){
@@ -58,16 +63,13 @@ public class Atividades {
 	}
 
 	public String exibirAtividade(String codigo) {
-
 		return codigo + ":" + this.nome + "\n"
 				+ "Responsável(s): " + this.getResponsavelAtividade() + " – " + this.cpf + "\n"
 				+ "===" + "\n"
 				+ this.descricao + "\n"
 				+ "===" + "\n"
 				+ "Tarefas:" + getTarefasConcluidas() + "/" + tarefas.size() + "\n"
-				+ "-" +  tarefas.get(0) + "\n"
-				+ "-" +  tarefas.get(1) + "\n"
-				+ "-" +  tarefas.get(2);
+				+ this.tarefasPendentesString();
 	}
 
 	public void concluirAtividade() {
@@ -85,10 +87,23 @@ public class Atividades {
 		return tarefasConcluidas;
 	}
 
-	public Pessoa getResponsavelAtividade() {
-		return this.pessoasController.recuperarPessoa(cpf);
+	public String getResponsavelAtividade() {
+		Pessoa pessoa = this.pessoasController.recuperarPessoa(cpf);
+		return pessoa.getNome();
 	}
 	
+	public String tarefasPendentesString(){
+		int count = 0;
+		String result = "";
+		for(Tarefas t: this.tarefas){
+			if(t.getConcluida() == false && count < 3){
+				result += " - "+t.toStringNomeAndCodigo() +"\n";
+				count ++;
+			}
+		}
+		return result;
+	}
+
 	public String encerrarAtividade(String atividadeId) {
 		for (Tarefas tarefa : this.tarefas) {
 			if (tarefa.getConcluida() == false) {
@@ -115,4 +130,9 @@ public class Atividades {
 			}
 		}	
 	}
+
+	public ArrayList<Tarefas> getTarefas() {
+		return tarefas;
+	}
+
 }

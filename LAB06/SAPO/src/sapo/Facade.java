@@ -1,7 +1,11 @@
 package sapo;
 
+import java.util.ArrayList;
+
 import sapo.Atividades.AtividadesController;
 import sapo.Atividades.AtividadesService;
+import sapo.Buscas.BuscasController;
+import sapo.Buscas.BuscasService;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 import sapo.Pessoas.PessoasService;
@@ -13,15 +17,18 @@ public class Facade {
     private PessoasController pessoasController;
     private AtividadesController atividadesController;
     private TarefasController tarefasController;
+    private BuscasController buscasController;
 
     public Facade() {
         var pessoasService = new PessoasService();
         var AtividadesService = new AtividadesService();
         var tarefasService = new TarefasService();
+        var buscasService = new BuscasService();
         
         this.pessoasController = new PessoasController(pessoasService);
         this.atividadesController = new AtividadesController(AtividadesService);
         this.tarefasController = new TarefasController(tarefasService);
+        this.buscasController = new BuscasController(buscasService);
     }
 
     public PessoasController getPessoasController() {
@@ -34,6 +41,10 @@ public class Facade {
 
     public TarefasController getTarefasController() {
         return tarefasController;
+    }
+
+    public BuscasController getBuscasController() {
+        return buscasController;
     }
 
     public void cadastrarPessoa(String cpf, String nome, String[] habilidades) {
@@ -147,4 +158,9 @@ public class Facade {
     public void alterarResponsavelAtividade(String codigo, String cpf) {
     	this.atividadesController.alterarResponsavelAtividade(codigo, cpf);
     }
+
+    public ArrayList<String> exibirPessoas(String consulta) {
+        return this.buscasController.exibirPessoas(consulta, this.pessoasController);
+    }
+
 }

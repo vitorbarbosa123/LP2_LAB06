@@ -1,13 +1,18 @@
 package sapo.Pessoas;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class PessoasService {
 
     private PessoasRepository pessoasRepository;
 
+    public PessoasService(){
+        pessoasRepository = new PessoasRepository();
+    }
+
     public Pessoa cadastrarPessoa(String cpf, String nome, String[] habilidades) {
-        return this.pessoasRepository.cadastrarPessoa(cpf, nome, habilidades);
+    	return this.pessoasRepository.cadastrarPessoa(cpf, nome, habilidades);
     }
 
     public String buscarPessoa(String cpf) {
@@ -49,8 +54,8 @@ public class PessoasService {
         return saida;
     }
 
-    public Pessoa recuperarPessoa(String cpf){
-        return this.pessoasRepository.recuperarPessoa(cpf);
+    public Collection<Pessoa> getMapa() {
+        return this.pessoasRepository.getMapa();
     }
     
 }

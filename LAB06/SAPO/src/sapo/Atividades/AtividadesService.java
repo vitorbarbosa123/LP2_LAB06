@@ -1,8 +1,17 @@
 package sapo.Atividades;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+
 public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
+
+
+    public AtividadesService(){
+        this.atividadesRepository = new AtividadesRepository();
+    }
 
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf);
@@ -43,4 +52,16 @@ public class AtividadesService {
    public Atividades recuperaAtividade(String atividadeId) {
         return this.atividadesRepository.recuperaAtividade(atividadeId);
    }
+
+    public Collection<Atividades> getMapa() {
+        return this.atividadesRepository.getMapa();
+    }
+
+    public HashMap<String, Atividades> getAtividade() {
+        return this.atividadesRepository.getAtividade();
+    }
+
+    public ArrayList<String> getTermos(String atividadeId) {
+        return this.atividadesRepository.getTermos(atividadeId);
+    }
 }
