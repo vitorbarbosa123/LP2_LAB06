@@ -5,7 +5,7 @@ public class TarefasGerenciais {
   private String TarefasGerenciaisId;
   private String nome;
   private boolean concluida;
-  private int horasTotais;
+  private int tempoRealizacao;
 
   private TarefasService tarefasService;
   private String habilidades; 
@@ -15,17 +15,11 @@ public class TarefasGerenciais {
     this.nome = nome;
     this.habilidades = this.recuperaHabilidadesDeTarefas();
     this.concluida = false;
-    this.horasTotais = this.recuperaHorasDeTarefas();
+    this.tempoRealizacao = tempoRealizacao;
   }
 
   public void concluirTarefaGerencial() {
     this.concluida = true;
-  }
-
-  public int recuperaHorasDeTarefas() {
-    int horasDeTarefa = this.tarefasService.getHorasDeTodasAsTarefas();
-
-    return horasDeTarefa;
   }
 
   public String recuperaHabilidadesDeTarefas() {
@@ -37,14 +31,14 @@ public class TarefasGerenciais {
 
   public void adicionarHoras(int novasHoras) {
     this.seTarefaConcluidaException();
-    this.horasTotais += novasHoras;
+    this.tempoRealizacao += novasHoras;
   }
 
   public void removerHoras(int horasRemover) {
     this.seTarefaConcluidaException();
 
-    if(horasRemover > this.horasTotais) this.horasTotais = 0;
-    else this.horasTotais -= horasRemover;
+    if(horasRemover > this.tempoRealizacao) this.tempoRealizacao = 0;
+    else this.tempoRealizacao -= horasRemover;
   }
 
   private void seTarefaConcluidaException(){

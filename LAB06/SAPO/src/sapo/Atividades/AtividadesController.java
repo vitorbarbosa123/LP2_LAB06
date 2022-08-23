@@ -13,6 +13,10 @@ public class AtividadesController {
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
         return this.atividadesService.cadastrarAtividade(nome, descricao, cpf);
     }
+    public String cadastrarTarefaGerencial(String nome, String descricao, String cpf) {
+        return this.atividadesService.cadastrarAtividade(nome, descricao, cpf);
+    }
+
     
     public void encerrarAtividade(String codigo) {
     	this.atividadesService.encerrarAtividade(codigo);
