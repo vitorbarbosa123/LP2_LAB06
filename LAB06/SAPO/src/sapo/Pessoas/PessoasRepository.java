@@ -1,7 +1,7 @@
 package sapo.Pessoas;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class PessoasRepository {
@@ -12,8 +12,8 @@ public class PessoasRepository {
         this.pessoas = new HashMap<>();
     }
 
-    public Map<String, Pessoa> getPessoas() {
-        return pessoas;
+    public Collection<Pessoa> getMapa() {
+        return this.pessoas.values();
     }
 
     public Pessoa cadastrarPessoa(String cpf, String nome, String[] habilidades) {
@@ -29,5 +29,5 @@ public class PessoasRepository {
         if (pessoas.containsKey(cpf)) return this.pessoas.get(cpf);
         throw new NoSuchElementException("Pessoa não existe");
     }
-
+    
 }

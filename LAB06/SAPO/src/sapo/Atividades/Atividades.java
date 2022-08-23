@@ -131,4 +131,8 @@ public class Atividades {
 		}	
 	}
 
+	public ArrayList<Tarefas> getTarefas() {
+		return tarefas;
+	}
+
 }

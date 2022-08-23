@@ -5,7 +5,6 @@ public class Buscas {
     private String consulta;
     private String nome;
     private String idAtividade;
-    // obs: antes era cpf id ???
     private String id;
     private int nBuscas;
     private int indexBusca;

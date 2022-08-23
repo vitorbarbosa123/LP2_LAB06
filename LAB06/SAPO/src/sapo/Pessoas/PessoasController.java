@@ -1,5 +1,7 @@
 package sapo.Pessoas;
 
+import java.util.Collection;
+
 public class PessoasController {
                     
     private PessoasService pessoasService;
@@ -43,4 +45,9 @@ public class PessoasController {
     public Pessoa recuperarPessoa(String cpf){
         return this.recuperarPessoa(cpf);
     }
+
+    public Collection<Pessoa> getMapa() {
+        return this.pessoasService.getMapa();
+    }
+
 }

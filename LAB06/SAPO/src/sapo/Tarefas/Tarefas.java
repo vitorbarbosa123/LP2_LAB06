@@ -14,7 +14,6 @@ public class Tarefas {
     private Map<String, Pessoa> responsaveis;
     private int horasGasta;
     private String nome;
-
     private String[] habilidades;
 
     public Tarefas(String taferaID, String nome, String[] habilidades, Atividades atividade) {

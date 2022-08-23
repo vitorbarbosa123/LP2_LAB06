@@ -1,5 +1,6 @@
 package sapo.Tarefas;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -12,6 +13,10 @@ public class TarefasRepository {
 
     public TarefasRepository(){
         this.tarefas = new HashMap<>();
+    }
+
+    public Collection<Tarefas> getMapa() {
+        return this.tarefas.values();
     }
 
     public Tarefas cadastrarTarefa(String tarefaID, String nome, String[] habilidades, Atividades atividade) {

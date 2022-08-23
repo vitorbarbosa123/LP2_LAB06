@@ -1,5 +1,4 @@
 package sapo;
-
 import org.junit.jupiter.api.BeforeEach;
 
 public class BaseTest {
@@ -7,7 +6,6 @@ public class BaseTest {
    
     protected Facade facade;
     protected String codigoAtividade;
-    
     @BeforeEach
 	void setUp() throws Exception {
 		this.facade = new Facade();
