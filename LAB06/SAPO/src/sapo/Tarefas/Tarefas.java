@@ -96,7 +96,7 @@ public class Tarefas {
         return result;
     }
 
-    private String getHabilidadesString(){
+    public String getHabilidadesString(){
         String result = "";
         int lengthHabilidades = this.habilidades.length;
 
@@ -116,6 +116,10 @@ public class Tarefas {
 
     public boolean getConcluida(){
         return this.concluida;
+    }
+
+    public int getHoras() {
+        return this.horasGasta;
     }
 
 }
