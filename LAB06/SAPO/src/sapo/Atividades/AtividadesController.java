@@ -27,11 +27,6 @@ public class AtividadesController {
     	if(value.isEmpty() || value.isBlank()) return true;
     	return false;
     }
-    
-    public String cadastrarTarefaGerencial(String nome, String descricao, String cpf, PessoasController pc) {
-        return this.atividadesService.cadastrarAtividade(nome, descricao, cpf, pc);
-    }
-
 
     public void encerrarAtividade(String codigo) {
     	this.atividadesService.encerrarAtividade(codigo);

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import sapo.Pessoas.PessoasController;
+import sapo.Tarefas.Tarefas;
+import sapo.Tarefas.TarefasGerenciais;
 public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
@@ -75,7 +77,7 @@ public class AtividadesService {
         atividade.cadastrarTarefa (novaTarefa);
     }
 
-    public void cadastrarTarefaGerencial(String atividadeId, Tarefas novaTarefa) {
+    public void cadastrarTarefaGerencial(String atividadeId, TarefasGerenciais novaTarefa) {
         Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
         atividade.cadastrarTarefaGerencial (novaTarefa);
     }
