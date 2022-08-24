@@ -28,5 +28,7 @@ public class BaseTest {
             CPF_PESSOA
         );
     }
-    
-}
+
+    protected void methodFactoryPessoa(String cpf, String nome, String[] habilidades){
+        this.facade.cadastrarPessoa(cpf, nome, habilidades);
+    }
