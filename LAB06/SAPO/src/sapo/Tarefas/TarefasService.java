@@ -26,13 +26,13 @@ public class TarefasService {
 
     public String cadastrarTarefaGerencial(String atividadeId, String nome, String[] habilidades, String[] idTarefas, AtividadesController atividadesC) {
         Atividades atividade = atividadesC.recuperaAtividade(atividadeId);
-        int finalDoIDTarefa = atividadesC.getQuantidadeTaferas(atividadeId);
-        String tarefaID = atividadeId+"-"+finalDoIDTarefa;
+        int finalDoIDTarefa = atividadesC.getQuantidadeTarefasGerenciais(atividadeId);
+        String tarefaGerencialID = atividadeId+"-"+finalDoIDTarefa;
 
-        TarefasGerenciais novaTarefaGerencial = this.tarefasRepository.cadastrarTarefaGerencial(tarefaID, nome, habilidades, atividade);
+        TarefasGerenciais novaTarefaGerencial = this.tarefasRepository.cadastrarTarefaGerencial(tarefaGerencialID, nome, habilidades, atividade);
         atividadesC.cadastrarTarefaGerencial(atividadeId, novaTarefaGerencial);
        
-        return tarefaID;
+        return tarefaGerencialID;
     }
 
     public Tarefas buscarTarefa(String idTarefa){
@@ -97,7 +97,6 @@ public class TarefasService {
         return tarefa.getConcluida();
     }
 
-
     public int getHorasDeTodasAsTarefas() {
         int tempoTotal = this.tarefasRepository.getHorasTarefas();
         return tempoTotal;
@@ -108,9 +107,24 @@ public class TarefasService {
         return habilidades;
         
     }
+    public boolean getTarefasConcluidas() {
+        boolean isConcluida = this.tarefasRepository.getConcluidaTarefas();
+        return isConcluida;
+        
+    }
     public Collection<Tarefas> getMapa() {
         return this.tarefasRepository.getMapa();
 
     }
+
+    public void validaEstadoTarefasDeTarefasGerencial(String idAtividade, AtividadesController ac) {
+       boolean novoEstado = this.getTarefasConcluidas();
+  
+        if (novoEstado == false) {
+            novoEstado = false;
+        }
+        ac.alteraEstadoAtvidade(idAtividade, novoEstado);
+    }
+
 
 }
