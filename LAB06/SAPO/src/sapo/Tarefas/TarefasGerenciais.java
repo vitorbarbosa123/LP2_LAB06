@@ -7,7 +7,7 @@ public class TarefasGerenciais {
   private boolean concluida;
   private int tempoRealizacao;
 
-  private TarefasService tarefasService;
+  private TarefasController tarefasController;
   private String habilidades; 
 
   public TarefasGerenciais (String TarefasGerenciaisId, String nome, String[] habilidades) {
@@ -23,11 +23,10 @@ public class TarefasGerenciais {
   }
 
   public String recuperaHabilidadesDeTarefas() {
-    String habilidades = this.tarefasService.getHabilidadesDeTodasAsTarefas();
+    String habilidades = this.tarefasController.getHabilidadesDeTodasAsTarefas();
 
     return habilidades;
   }
-
 
   public void adicionarHoras(int novasHoras) {
     this.seTarefaConcluidaException();

@@ -14,6 +14,7 @@ public class Atividades {
 		private Tarefas tarefa;
 
     private ArrayList<Tarefas> tarefas;
+		private ArrayList<Tarefas> tarefasGerenciais;
     private boolean concluida;
 
 		private PessoasController pessoasController;
@@ -42,8 +43,15 @@ public class Atividades {
         return this.tarefas.size();
     }
 
+    public int getQuantidadeTarefasGerenciais(){
+        return this.tarefasGerenciais.size();
+    }
+
     public void cadastrarTarefa(Tarefas novaTarefa){
         tarefas.add(novaTarefa);
+    }
+    public void cadastrarTarefaGerencial(Tarefas novaTarefaGerencial){
+			tarefasGerenciais.add(novaTarefaGerencial);
     }
 
     public void removerTarefa(String idTarefa){
@@ -133,6 +141,10 @@ public class Atividades {
 
 	public ArrayList<Tarefas> getTarefas() {
 		return tarefas;
+	}
+
+	public void setConcluida (boolean valor) {
+		this.concluida = valor;
 	}
 
 }

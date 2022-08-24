@@ -8,7 +8,6 @@ public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
 
-
     public AtividadesService(){
         this.atividadesRepository = new AtividadesRepository();
     }
@@ -48,6 +47,11 @@ public class AtividadesService {
        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
        return atividade.getQuantidadeTarefas();
    }
+
+   public int getQuantidadeTarefasGerenciais(String atividadeId){
+       Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+       return atividade.getQuantidadeTarefas();
+   }
    
    public Atividades recuperaAtividade(String atividadeId) {
         return this.atividadesRepository.recuperaAtividade(atividadeId);
@@ -63,5 +67,20 @@ public class AtividadesService {
 
     public ArrayList<String> getTermos(String atividadeId) {
         return this.atividadesRepository.getTermos(atividadeId);
+    }
+
+    public void cadastrarTarefa(String atividadeId, Tarefas novaTarefa) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.cadastrarTarefa (novaTarefa);
+    }
+
+    public void cadastrarTarefaGerencial(String atividadeId, Tarefas novaTarefa) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.cadastrarTarefaGerencial (novaTarefa);
+    }
+    
+    public void alteraEstadoAtvidade(String atividadeId, boolean novoEstado) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.setConcluida(novoEstado);
     }
 }
