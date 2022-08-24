@@ -100,7 +100,7 @@ public class Tarefas {
         return result;
     }
 
-    private String getHabilidadesString(){
+    public String getHabilidadesString(){
         String result = "";
         int lengthHabilidades = this.habilidades.length;
 
@@ -122,8 +122,14 @@ public class Tarefas {
         return this.concluida;
     }
 
+    public int getHoras() {
+        return this.horasGasta;
+
+    }
+    
     public String toStringNomeAndCodigo(){
         return this.nome + " - " + this.codigo;
+
     }
 
 }

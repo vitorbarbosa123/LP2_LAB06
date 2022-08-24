@@ -24,6 +24,17 @@ public class TarefasService {
         return tarefaID;
     }
 
+    public String cadastrarTarefaGerencial(String atividadeId, String nome, String[] habilidades, String[] idTarefas, AtividadesController atividadesC) {
+        Atividades atividade = atividadesC.recuperaAtividade(atividadeId);
+        int finalDoIDTarefa = atividadesC.getQuantidadeTaferas(atividadeId);
+        String tarefaID = atividadeId+"-"+finalDoIDTarefa;
+
+        TarefasGerenciais novaTarefaGerencial = this.tarefasRepository.cadastrarTarefaGerencial(tarefaID, nome, habilidades, atividade);
+        atividadesC.cadastrarTarefaGerencial(atividadeId, novaTarefaGerencial);
+       
+        return tarefaID;
+    }
+
     public Tarefas buscarTarefa(String idTarefa){
         return this.tarefasRepository.recuperarTarefa(idTarefa);
     }
@@ -86,8 +97,20 @@ public class TarefasService {
         return tarefa.getConcluida();
     }
 
+
+    public int getHorasDeTodasAsTarefas() {
+        int tempoTotal = this.tarefasRepository.getHorasTarefas();
+        return tempoTotal;
+    }
+
+    public String getHabilidadesDeTodasAsTarefas() {
+        String habilidades = this.tarefasRepository.getHabilidadesTarefas();
+        return habilidades;
+        
+    }
     public Collection<Tarefas> getMapa() {
         return this.tarefasRepository.getMapa();
+
     }
 
 }
