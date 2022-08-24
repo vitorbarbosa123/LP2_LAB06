@@ -37,7 +37,7 @@ public class TarefasRepository {
 
     public void removerTarefa(String idTarefa){
         this.recuperarTarefa(idTarefa);
-        tarefasGerenciais.remove(idTarefa);
+        tarefas.remove(idTarefa);
     }
 
     public void removerDaTarefaGerencial(String idTarefaGerencial, String idTarefa){
