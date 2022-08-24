@@ -10,7 +10,7 @@ import sapo.Atividades.Atividades;
 public class AtividadesTest extends BaseTest {
 
     @Test
-    void testVerificarCodigoTarefa(){
+    void testVerificarCodigoAtividade(){
         assertEquals("STD-0", this.codigoAtividade );
     }
 
@@ -30,7 +30,7 @@ public class AtividadesTest extends BaseTest {
     void testExibirAtividade(){
         String stringAtividade = this.facade.exibirAtividade(this.codigoAtividade);
         assertEquals(this.codigoAtividade+": Estudar OO\n"
-            + "Responsável: Hernandes – "+ CPF_PESSOA + "\n"
+            + "Responsável: Hernandes – "+ CPF_PESSOA_HERNANDES + "\n"
             + "==="+ "\n"
             + "Atividade de estudo de OO, considerando alunos com experiência de programação e uso da linguagem Java.\n"
             + "==="+ "\n"
