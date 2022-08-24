@@ -16,6 +16,9 @@ public class TarefasController {
     public String cadastrarTarefa(String atividadeId, String nome, String[] habilidades, AtividadesController atividadesC) {
         return this.tarefasService.cadastrarTarefa(atividadeId, nome, habilidades, atividadesC);
     }
+    public String cadastrarTarefaGerencial(String atividadeId, String nome, String[] habilidades, AtividadesController atividadesC) {
+        return this.tarefasService.cadastrarTarefaGerencial(atividadeId, nome, habilidades, atividadesC);
+    }
 
     public Tarefas buscarTarefa(String idTarefa){
         return this.tarefasService.buscarTarefa(idTarefa);
@@ -65,4 +68,7 @@ public class TarefasController {
         return this.tarefasService.getMapa();
     }
 
+    public String getHabilidadesDeTodasAsTarefas() {
+        return this.tarefasService.getHabilidadesDeTodasAsTarefas();    
+    }
 }

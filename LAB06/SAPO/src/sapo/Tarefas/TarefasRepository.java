@@ -62,6 +62,18 @@ public class TarefasRepository {
         return horasTotais;
     }
 
+    public boolean getConcluidaTarefas() {
+        boolean tarefaConcluida = false;
+
+        for (Tarefas tarefas : tarefas.values()) {
+              if(tarefas.getConcluida() == true) {
+                tarefaConcluida = true;
+              }
+        }
+
+        return tarefaConcluida;
+    }
+
     public String getHabilidadesTarefas() {
         String habilidadeObrigatoria = "gestão";
         String habilidades = "";
