@@ -48,12 +48,16 @@ public class PessoasService {
 
     public String listarComentariosPessoa(String cpf) {
         Pessoa pessoa = this.pessoasRepository.recuperarPessoa(cpf);
-        String saida = pessoa.getNome() + " - " + pessoa.getCpf() + "\n";
+        String buscaPessoa = pessoa.getNome() + " - " + pessoa.getCpf() + "\n";
+        String result = "";
         ArrayList<String> comentarios = pessoa.getComentarios();
         for (int i = 0 ; i < comentarios.size(); i++) {
-            saida = saida + "-- " + comentarios.get(i) + "\n";
-        }
-        return saida;
+            result = 
+                buscaPessoa + "\n" + 
+                "Comentários:" + 
+                "-- " + comentarios.get(i) + "(" + pessoa.getNome() + ")" +  "\n";
+            }
+        return result;
     }
     
     public void definirFuncaoPessoa(String cpf, Funcao funcao) {
