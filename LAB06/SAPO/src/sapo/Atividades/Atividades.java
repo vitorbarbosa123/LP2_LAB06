@@ -2,6 +2,7 @@ package sapo.Atividades;
 
 import java.util.ArrayList;
 import sapo.Tarefas.Tarefas;
+import sapo.Tarefas.TarefasGerenciais;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 
@@ -47,8 +48,8 @@ public class Atividades {
     public void cadastrarTarefa(Tarefas novaTarefa){
         tarefas.add(novaTarefa);
     }
-    public void cadastrarTarefaGerencial(Tarefas novaTarefaGerencial){
-			tarefasGerenciais.add(novaTarefaGerencial);
+    public void cadastrarTarefaGerencial(TarefasGerenciais novaTarefa){
+			tarefasGerenciais.add(novaTarefa);
     }
 
     public void removerTarefa(String idTarefa){
