@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import sapo.Pessoas.PessoasController;
 public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
@@ -12,8 +13,8 @@ public class AtividadesService {
         this.atividadesRepository = new AtividadesRepository();
     }
 
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf);
+    public String cadastrarAtividade(String nome, String descricao, String cpf, PessoasController pc) {
+        return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf, pc);
     }
           
    public void encerrarAtividade(String codigo) {

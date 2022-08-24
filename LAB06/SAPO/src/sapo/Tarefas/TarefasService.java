@@ -1,6 +1,7 @@
 package sapo.Tarefas;
 
 import java.util.Collection;
+import java.util.List;
 
 import sapo.Atividades.Atividades;
 import sapo.Atividades.AtividadesController;
@@ -24,7 +25,13 @@ public class TarefasService {
         return tarefaID;
     }
 
-    public String cadastrarTarefaGerencial(String atividadeId, String nome, String[] habilidades, String[] idTarefas, AtividadesController atividadesC) {
+    public String cadastrarTarefaGerencial(
+    		String atividadeId,
+    		String nome,
+    		String[] habilidades,
+    		String[] idTarefas,
+    		AtividadesController atividadesC
+    ){
         Atividades atividade = atividadesC.recuperaAtividade(atividadeId);
         int finalDoIDTarefa = atividadesC.getQuantidadeTarefasGerenciais(atividadeId);
         String tarefaGerencialID = atividadeId+"-"+finalDoIDTarefa;
@@ -96,6 +103,11 @@ public class TarefasService {
         Tarefas tarefa = this.tarefasRepository.recuperarTarefa(idTarefa);
         return tarefa.getConcluida();
     }
+    
+    public List<Tarefas> recuperarTarefasPessoa(String cpf){
+    	 return this.tarefasRepository.recuperarTarefasPessoa(cpf);
+    }
+    
 
     public int getHorasDeTodasAsTarefas() {
         int tempoTotal = this.tarefasRepository.getHorasTarefas();

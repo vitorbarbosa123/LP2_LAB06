@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import sapo.Tarefas.Tarefas;
 import sapo.Tarefas.TarefasGerenciais;
+import sapo.Pessoas.PessoasController;
 
+import sapo.Tarefas.Tarefas;
 public class AtividadesController {
 
 	private AtividadesService atividadesService;
@@ -15,9 +17,22 @@ public class AtividadesController {
         this.atividadesService = atividadesService;
     }
 		          
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        return this.atividadesService.cadastrarAtividade(nome, descricao, cpf);
-    }    
+
+    public String cadastrarAtividade(String nome, String descricao, String cpf, PessoasController pc) {
+        if(this.myIsEmpty(cpf) || this.myIsEmpty(nome) || this.myIsEmpty(descricao))
+        	throw new IllegalArgumentException();
+    	return this.atividadesService.cadastrarAtividade(nome, descricao, cpf, pc);
+    }
+    private boolean myIsEmpty(String value) {
+    	if(value.isEmpty() || value.isBlank()) return true;
+    	return false;
+    }
+    
+    public String cadastrarTarefaGerencial(String nome, String descricao, String cpf, PessoasController pc) {
+        return this.atividadesService.cadastrarAtividade(nome, descricao, cpf, pc);
+    }
+
+
     public void encerrarAtividade(String codigo) {
     	this.atividadesService.encerrarAtividade(codigo);
     }
@@ -35,6 +50,7 @@ public class AtividadesController {
     }
 
     public void alterarDescricaoAtividade(String codigo, String descricao) {
+
     	this.atividadesService.alterarDescricaoAtividade(codigo, descricao);
     }
 

@@ -1,11 +1,14 @@
 package sapo.Tarefas;
 
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 import sapo.Atividades.Atividades;
+import sapo.Pessoas.Pessoa;
 
 public class TarefasRepository {
 
@@ -90,5 +93,20 @@ public class TarefasRepository {
         this.recuperarTarefaGerencial(idTarefaGerencial);
         totalTarefas += tarefasGerenciais.size();
         return totalTarefas;
+    }
+    
+    public List<Tarefas> recuperarTarefasPessoa(String cpf){
+    	List<Tarefas> listaTarefasPessoa = new ArrayList<>();
+    	
+    	for(Tarefas tarefa: tarefas.values()) {
+    		for(Pessoa pessoa: tarefa.getResponsaveis()) {
+    			if(pessoa.getCpf().equals(cpf)) {
+    				listaTarefasPessoa.add(tarefa);
+    			}
+    		}
+    	}
+    	
+    	return listaTarefasPessoa;
+        
     }
 }

@@ -2,19 +2,36 @@ package sapo.Pessoas;
 
 import java.util.ArrayList;
 
+import sapo.Funcoes.Funcao;
+import sapo.Funcoes.SemFuncao;
+
 public class Pessoa {
 
     private String cpf;
     private String nome;
     private String[] habilidades;
+    private Funcao funcao;
     private ArrayList<String> comentarios;
 
     public Pessoa(String cpf, String nome, String[] habilidades) {
         this.cpf = cpf;
         this.nome = nome;
         this.habilidades = habilidades;
+        this.funcao = new SemFuncao(0, new ArrayList<>());
     }
-
+    
+    public void definirFuncaoPessoa(Funcao funcao) {
+    	this.funcao = funcao;
+    }
+    
+    public void removerFuncao() {
+    	this.funcao = new SemFuncao(funcao.getNivelAnterior(), funcao.getCodigosTarefasAnteriores());
+    }
+    
+    public Funcao getFuncao() {
+    	return this.funcao;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -48,7 +65,7 @@ public class Pessoa {
     public ArrayList<String> getComentarios() {
         return comentarios;
     }
-
+    
     public ArrayList<String> getTermos() {
         ArrayList<String> termos = new ArrayList<>();
         termos.add(cpf);
@@ -61,5 +78,6 @@ public class Pessoa {
         }
         return termos;
     }
+
     
 }

@@ -1,5 +1,8 @@
 package sapo.Tarefas;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -8,7 +11,7 @@ import sapo.Pessoas.Pessoa;
 
 public class Tarefas {
 
-    private String codigo;
+	private String codigo;
     private Atividades atividade;
     private boolean concluida;
     private Map<String, Pessoa> responsaveis;
@@ -99,6 +102,11 @@ public class Tarefas {
 
         return result;
     }
+    
+    public List<Pessoa> getResponsaveis(){
+        return new ArrayList<>(responsaveis.values());
+        
+    }
 
     public String getHabilidadesString(){
         String result = "";
@@ -120,6 +128,10 @@ public class Tarefas {
 
     public boolean getConcluida(){
         return this.concluida;
+    }
+    
+    public String[] getHabilidades() {
+    	return habilidades;
     }
 
     public int getHoras() {

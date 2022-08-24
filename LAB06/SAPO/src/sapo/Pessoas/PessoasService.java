@@ -3,6 +3,8 @@ package sapo.Pessoas;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import sapo.Funcoes.Funcao;
+
 public class PessoasService {
 
     private PessoasRepository pessoasRepository;
@@ -53,7 +55,15 @@ public class PessoasService {
         }
         return saida;
     }
-
+    
+    public void definirFuncaoPessoa(String cpf, Funcao funcao) {
+    	Pessoa pessoa = this.recuperarPessoa(cpf);
+    	pessoa.definirFuncaoPessoa(funcao);
+    }
+    public Pessoa recuperarPessoa(String cpf){
+    	return this.pessoasRepository.recuperarPessoa(cpf);
+    }
+    
     public Collection<Pessoa> getMapa() {
         return this.pessoasRepository.getMapa();
     }

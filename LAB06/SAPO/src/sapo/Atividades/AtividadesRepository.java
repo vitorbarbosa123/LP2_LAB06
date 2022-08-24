@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+import sapo.Pessoas.PessoasController;
 import sapo.Tarefas.Tarefas;
 
 public class AtividadesRepository {
@@ -17,14 +18,14 @@ public class AtividadesRepository {
 
     public Collection<Atividades> getMapa() {
         return this.atividades.values();
-    }
+    } 
 
     public HashMap<String, Atividades> getAtividade() {
         return atividades;
     }
     
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        Atividades novaAtividade = new Atividades(nome, descricao, cpf);
+    public String cadastrarAtividade(String nome, String descricao, String cpf, PessoasController pc) {
+        Atividades novaAtividade = new Atividades(nome, descricao, cpf, pc);
         String codigo = criaCodigoAtividade(nome);
         this.atividades.put(codigo, novaAtividade);
         return codigo;
@@ -34,10 +35,19 @@ public class AtividadesRepository {
 
         String codigo = "";
         String marcador = "X";
-        codigo = nome.replaceAll("[aeiou]", "");
+        codigo = nome.replaceAll("[aeiouAEIOU]", "").toUpperCase();
                 
         if(codigo.length() < 3) {
-            codigo = codigo + marcador; 
+        	if(codigo.length() < 1) codigo += marcador+marcador;
+        	if(codigo.length() < 2) codigo += marcador;
+        	
+            codigo += marcador;
+        }else {
+        	String novoCodigo = "";
+        	for(int i = 0; i<3; i++){
+        		novoCodigo += codigo.charAt(i);
+        	}
+        	codigo = novoCodigo;
         }
                 
         codigo = codigo + "-" + tamanhoDeAtividades();

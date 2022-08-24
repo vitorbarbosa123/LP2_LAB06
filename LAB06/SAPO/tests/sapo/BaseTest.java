@@ -6,6 +6,7 @@ public class BaseTest {
    
     protected Facade facade;
     protected String codigoAtividade;
+    
     @BeforeEach
 	void setUp() throws Exception {
 		this.facade = new Facade();
@@ -24,5 +25,13 @@ public class BaseTest {
             "Atividade de estudo de OO, considerando alunos com experiência de programação e uso da linguagem Java.",
             CPF_PESSOA
         );
+    }
+
+    protected void factoryTarefa(){
+        // pass
+    }
+    
+    protected void methodFactoryPessoa(String cpf, String nome, String[] habilidades){
+        this.facade.cadastrarPessoa(cpf, nome, habilidades);
     }
 }
