@@ -5,7 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import sapo.Tarefas.Tarefas;
+import sapo.Tarefas.TarefasGerenciais;
+import sapo.Pessoas.PessoasController;
 
+import sapo.Tarefas.Tarefas;
 public class AtividadesController {
 
 	private AtividadesService atividadesService;
@@ -14,10 +17,17 @@ public class AtividadesController {
         this.atividadesService = atividadesService;
     }
 		          
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        return this.atividadesService.cadastrarAtividade(nome, descricao, cpf);
+
+    public String cadastrarAtividade(String nome, String descricao, String cpf, PessoasController pc) {
+        if(this.myIsEmpty(cpf) || this.myIsEmpty(nome) || this.myIsEmpty(descricao))
+        	throw new IllegalArgumentException();
+    	return this.atividadesService.cadastrarAtividade(nome, descricao, cpf, pc);
     }
-    
+    private boolean myIsEmpty(String value) {
+    	if(value.isEmpty() || value.isBlank()) return true;
+    	return false;
+    }
+
     public void encerrarAtividade(String codigo) {
     	this.atividadesService.encerrarAtividade(codigo);
     }
@@ -35,6 +45,7 @@ public class AtividadesController {
     }
 
     public void alterarDescricaoAtividade(String codigo, String descricao) {
+
     	this.atividadesService.alterarDescricaoAtividade(codigo, descricao);
     }
 
@@ -50,8 +61,16 @@ public class AtividadesController {
         return this.atividadesService.getQuantidadeTarefas(atividadeId);
     }
 
+    public int getQuantidadeTarefasGerenciais(String atividadeId) {
+        return this.atividadesService.getQuantidadeTarefasGerenciais(atividadeId);
+    }
+
     public void cadastrarTarefa(String atividadeId, Tarefas novaTarefa) {
-        this.cadastrarTarefa(atividadeId, novaTarefa);
+        this.atividadesService.cadastrarTarefa(atividadeId, novaTarefa);
+    }
+
+    public void cadastrarTarefaGerencial(String atividadeId, TarefasGerenciais novaTarefaGerencial) {
+        this.atividadesService.cadastrarTarefaGerencial(atividadeId, novaTarefaGerencial);
     }
 
     public void removerTarefa(String idAtividade, String idTarefa) {
@@ -68,6 +87,10 @@ public class AtividadesController {
 
     public ArrayList<String> getTermos(String atividadeId) {
         return this.atividadesService.getTermos(atividadeId);
+    }
+
+    public void alteraEstadoAtvidade(String atividadeId, boolean novoEstado) {
+        this.atividadesService.alteraEstadoAtvidade(atividadeId, novoEstado);
     }
     
 }

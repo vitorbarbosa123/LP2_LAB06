@@ -6,7 +6,6 @@ import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 
 public class Atividades {
-    
     private String nome;
     private String cpf;
     private String descricao;
@@ -14,18 +13,20 @@ public class Atividades {
 		private Tarefas tarefa;
 
     private ArrayList<Tarefas> tarefas;
+		private ArrayList<Tarefas> tarefasGerenciais;
     private boolean concluida;
 
 		private PessoasController pessoasController;
 
-    public Atividades(String nome, String descricao, String cpf) {
+    public Atividades(String nome, String descricao, String cpf, PessoasController pc) {
     	this.nome = nome;
     	this.descricao = descricao;
     	this.cpf = cpf;
     	this.concluida = false;
     	this.tarefas = new ArrayList<>();
+		this.pessoasController = pc; 
     	
-    	if(cpf.isEmpty() || cpf.isBlank()  ) {
+    	if(cpf.isEmpty() || cpf.isBlank()) {
     		throw new IllegalArgumentException("CPF VAZIO OU NULO");
     	}
     }
@@ -34,16 +35,20 @@ public class Atividades {
 		return this.nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
         
     public int getQuantidadeTarefas(){
         return this.tarefas.size();
     }
 
+    public int getQuantidadeTarefasGerenciais(){
+        return this.tarefasGerenciais.size();
+    }
+
     public void cadastrarTarefa(Tarefas novaTarefa){
         tarefas.add(novaTarefa);
+    }
+    public void cadastrarTarefaGerencial(Tarefas novaTarefaGerencial){
+			tarefasGerenciais.add(novaTarefaGerencial);
     }
 
     public void removerTarefa(String idTarefa){
@@ -63,8 +68,9 @@ public class Atividades {
 	}
 
 	public String exibirAtividade(String codigo) {
-		return codigo + ":" + this.nome + "\n"
-				+ "Responsável(s): " + this.getResponsavelAtividade() + " – " + this.cpf + "\n"
+		System.out.println(this.getResponsavelAtividade());
+		return codigo + ": " + this.nome + "\n"
+				+ "Responsável: " + this.getResponsavelAtividade() + " – " + this.cpf + "\n"
 				+ "===" + "\n"
 				+ this.descricao + "\n"
 				+ "===" + "\n"
@@ -90,6 +96,7 @@ public class Atividades {
 	public String getResponsavelAtividade() {
 		Pessoa pessoa = this.pessoasController.recuperarPessoa(cpf);
 		return pessoa.getNome();
+	
 	}
 	
 	public String tarefasPendentesString(){
@@ -130,9 +137,21 @@ public class Atividades {
 			}
 		}	
 	}
+	
+	public String getDescricao(){
+		return this.descricao;
+	}
+
+	public String getCPF(){
+		return this.cpf;
+	}
 
 	public ArrayList<Tarefas> getTarefas() {
 		return tarefas;
+	}
+
+	public void setConcluida (boolean valor) {
+		this.concluida = valor;
 	}
 
 }

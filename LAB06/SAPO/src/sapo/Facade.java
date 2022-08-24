@@ -6,9 +6,14 @@ import sapo.Atividades.AtividadesController;
 import sapo.Atividades.AtividadesService;
 import sapo.Buscas.BuscasController;
 import sapo.Buscas.BuscasService;
+
+import sapo.Atividades.Atividades;
+import sapo.Funcoes.FuncaoController;
+import sapo.Funcoes.FuncaoService;
 import sapo.Pessoas.Pessoa;
 import sapo.Pessoas.PessoasController;
 import sapo.Pessoas.PessoasService;
+import sapo.Tarefas.Tarefas;
 import sapo.Tarefas.TarefasController;
 import sapo.Tarefas.TarefasService;
 
@@ -18,17 +23,21 @@ public class Facade {
     private AtividadesController atividadesController;
     private TarefasController tarefasController;
     private BuscasController buscasController;
+    private FuncaoController funcaoController;
 
     public Facade() {
+    	
         var pessoasService = new PessoasService();
         var AtividadesService = new AtividadesService();
         var tarefasService = new TarefasService();
         var buscasService = new BuscasService();
+        var funcaoService = new FuncaoService();
         
         this.pessoasController = new PessoasController(pessoasService);
         this.atividadesController = new AtividadesController(AtividadesService);
         this.tarefasController = new TarefasController(tarefasService);
         this.buscasController = new BuscasController(buscasService);
+        this.funcaoController = new FuncaoController(funcaoService, pessoasController);
     }
 
     public PessoasController getPessoasController() {
@@ -129,8 +138,10 @@ public class Facade {
         return this.tarefasController.verificarTarefaIsConcluida(idTarefa);
     }
 
+
+    // Atividades
     public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        String codigo = this.atividadesController.cadastrarAtividade(nome, descricao, cpf);
+        String codigo = this.atividadesController.cadastrarAtividade(nome, descricao, cpf, this.pessoasController);
         return codigo;
     }    
 
@@ -152,6 +163,7 @@ public class Facade {
     }
 
     public void alterarDescricaoAtividade(String codigo, String descricao) {
+    	System.out.println("teste");
     	this.atividadesController.alterarDescricaoAtividade(codigo, descricao);
     }
 
@@ -163,4 +175,42 @@ public class Facade {
         return this.buscasController.exibirPessoas(consulta, this.pessoasController);
     }
 
+    public Atividades recuperaAtividade(String atividadeId) {
+        return this.atividadesController.recuperaAtividade(atividadeId);
+    }
+    
+    
+    // Funcoes
+    
+    public void cadastrarAluno(String cpf,String nome, String matr, int periodo, String[] habilidades){
+    	this.funcaoController.cadastrarAluno(cpf, nome, matr, periodo, habilidades);	
+    }
+    
+    public void cadastrarProfessor(
+        	String cpf,
+        	String nome,
+        	String siape,
+        	String[]  disciplinas,
+        	String[] habilidades
+        		
+    ){
+    	this.funcaoController.cadastrarProfessor(cpf, nome, siape, disciplinas, habilidades);
+    }
+    
+    public void definirFuncaoProfessor(String cpf,String siape,String[]  disciplinas){
+    	this.funcaoController.definirFuncaoProfessor(cpf, siape, disciplinas, this.tarefasController);
+    }
+    
+    public void definirFuncaoAluno(String cpf,String matr,int  periodo){
+    	this.funcaoController.definirFuncaoAluno(cpf, matr, periodo, this.tarefasController);
+    }
+    
+    public void removerFuncao(String cpf) {
+    	this.funcaoController.removerFuncao(cpf, this.tarefasController);
+    }
+    
+    public int pegarNivel(String cpf) {
+    	return this.funcaoController.pegarNivel(cpf, this.tarefasController);
+    };
+    
 }

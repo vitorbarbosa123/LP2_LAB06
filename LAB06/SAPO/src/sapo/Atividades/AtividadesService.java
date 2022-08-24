@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import sapo.Pessoas.PessoasController;
+import sapo.Tarefas.Tarefas;
+import sapo.Tarefas.TarefasGerenciais;
 public class AtividadesService {
     
     private AtividadesRepository atividadesRepository;
-
 
     public AtividadesService(){
         this.atividadesRepository = new AtividadesRepository();
     }
 
-    public String cadastrarAtividade(String nome, String descricao, String cpf) {
-        return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf);
+    public String cadastrarAtividade(String nome, String descricao, String cpf, PessoasController pc) {
+        return this.atividadesRepository.cadastrarAtividade(nome, descricao, cpf, pc);
     }
           
    public void encerrarAtividade(String codigo) {
@@ -48,6 +50,11 @@ public class AtividadesService {
        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
        return atividade.getQuantidadeTarefas();
    }
+
+   public int getQuantidadeTarefasGerenciais(String atividadeId){
+       Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+       return atividade.getQuantidadeTarefas();
+   }
    
    public Atividades recuperaAtividade(String atividadeId) {
         return this.atividadesRepository.recuperaAtividade(atividadeId);
@@ -63,5 +70,20 @@ public class AtividadesService {
 
     public ArrayList<String> getTermos(String atividadeId) {
         return this.atividadesRepository.getTermos(atividadeId);
+    }
+
+    public void cadastrarTarefa(String atividadeId, Tarefas novaTarefa) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.cadastrarTarefa (novaTarefa);
+    }
+
+    public void cadastrarTarefaGerencial(String atividadeId, TarefasGerenciais novaTarefa) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.cadastrarTarefaGerencial (novaTarefa);
+    }
+    
+    public void alteraEstadoAtvidade(String atividadeId, boolean novoEstado) {
+        Atividades atividade = this.atividadesRepository.recuperaAtividade(atividadeId);
+        atividade.setConcluida(novoEstado);
     }
 }

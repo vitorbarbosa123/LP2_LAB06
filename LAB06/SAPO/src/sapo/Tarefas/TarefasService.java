@@ -1,6 +1,7 @@
 package sapo.Tarefas;
 
 import java.util.Collection;
+import java.util.List;
 
 import sapo.Atividades.Atividades;
 import sapo.Atividades.AtividadesController;
@@ -22,6 +23,23 @@ public class TarefasService {
         atividadesC.cadastrarTarefa(atividadeId, novaTarefa);
        
         return tarefaID;
+    }
+
+    public String cadastrarTarefaGerencial(
+    		String atividadeId,
+    		String nome,
+    		String[] habilidades,
+    		String[] idTarefas,
+    		AtividadesController atividadesC
+    ){
+        Atividades atividade = atividadesC.recuperaAtividade(atividadeId);
+        int finalDoIDTarefa = atividadesC.getQuantidadeTarefasGerenciais(atividadeId);
+        String tarefaGerencialID = atividadeId+"-"+finalDoIDTarefa;
+
+        TarefasGerenciais novaTarefaGerencial = this.tarefasRepository.cadastrarTarefaGerencial(tarefaGerencialID, nome, habilidades, atividade);
+        atividadesC.cadastrarTarefaGerencial(atividadeId, novaTarefaGerencial);
+       
+        return tarefaGerencialID;
     }
 
     public Tarefas buscarTarefa(String idTarefa){
@@ -85,9 +103,40 @@ public class TarefasService {
         Tarefas tarefa = this.tarefasRepository.recuperarTarefa(idTarefa);
         return tarefa.getConcluida();
     }
+    
+    public List<Tarefas> recuperarTarefasPessoa(String cpf){
+    	 return this.tarefasRepository.recuperarTarefasPessoa(cpf);
+    }
+    
 
+    public int getHorasDeTodasAsTarefas() {
+        int tempoTotal = this.tarefasRepository.getHorasTarefas();
+        return tempoTotal;
+    }
+
+    public String getHabilidadesDeTodasAsTarefas() {
+        String habilidades = this.tarefasRepository.getHabilidadesTarefas();
+        return habilidades;
+        
+    }
+    public boolean getTarefasConcluidas() {
+        boolean isConcluida = this.tarefasRepository.getConcluidaTarefas();
+        return isConcluida;
+        
+    }
     public Collection<Tarefas> getMapa() {
         return this.tarefasRepository.getMapa();
+
     }
+
+    public void validaEstadoTarefasDeTarefasGerencial(String idAtividade, AtividadesController ac) {
+       boolean novoEstado = this.getTarefasConcluidas();
+  
+        if (novoEstado == false) {
+            novoEstado = false;
+        }
+        ac.alteraEstadoAtvidade(idAtividade, novoEstado);
+    }
+
 
 }

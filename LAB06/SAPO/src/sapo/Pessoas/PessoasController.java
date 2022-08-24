@@ -1,6 +1,7 @@
 package sapo.Pessoas;
 
 import java.util.Collection;
+import sapo.Funcoes.Funcao;
 
 public class PessoasController {
                     
@@ -41,9 +42,13 @@ public class PessoasController {
     public String listarComentariosPessoa(String cpf) {
         return this.pessoasService.listarComentariosPessoa(cpf);
     }
+    
+    public void definirFuncaoPessoa(String cpf, Funcao funcao) {
+    	this.pessoasService.definirFuncaoPessoa(cpf, funcao);
+    }
 
     public Pessoa recuperarPessoa(String cpf){
-        return this.recuperarPessoa(cpf);
+        return this.pessoasService.recuperarPessoa(cpf);
     }
 
     public Collection<Pessoa> getMapa() {
