@@ -24,21 +24,4 @@ public class TarefasTest extends BaseTest {
 		assertThrows(IllegalArgumentException.class, () -> this.facade.cadastrarTarefa("","", listaVazia));
 	}
 	
-	@Test
-	void testRemoverTarefa() {
-		this.facade.removerTarefa(this.codigoTarefa);
-	}
-	
-	@Test
-	void testExibirTarefa() {
-		String stringTarefa = this.facade.exibirTarefa(this.codigoTarefa);
-        assertEquals("Terminar o laboratório - " + this.codigoTarefa + "\r\n"
-            		+ "- Fazer os testes\r\n"
-            		+ "Aluno, Java\r\n"
-            		+ "(5 hora(s) executada(s))\r\n"
-            		+ "===\r\n"
-            		+ "Equipe:\r\n"
-            		+ "Daniella - " + CPF_PESSOA + "\r\n", stringTarefa);
-	}
-	
 }
