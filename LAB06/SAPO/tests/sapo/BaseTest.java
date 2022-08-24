@@ -1,4 +1,5 @@
 package sapo;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -8,6 +9,7 @@ public class BaseTest {
    
     protected Facade facade;
     protected String codigoAtividade;
+    protected String codigoTarefa;
     
     @BeforeEach
 	void setUp() throws Exception {
@@ -23,7 +25,7 @@ public class BaseTest {
         this.facade.cadastrarPessoa(CPF_PESSOA_VITOR, "Vitor", habilidadesVitor);
     }
 
-    private void factoryAtividade(){
+    private void factoryAtividade() {
         this.codigoAtividade = this.facade.cadastrarAtividade(
             "Estudar OO",
             "Atividade de estudo de OO, considerando alunos com experiência de programação e uso da linguagem Java.",
@@ -31,11 +33,8 @@ public class BaseTest {
         );
     }
 
-    protected void factoryTarefa(){
-        // pass
-    }
-    
     protected void methodFactoryPessoa(String cpf, String nome, String[] habilidades){
         this.facade.cadastrarPessoa(cpf, nome, habilidades);
     }
+
 }
